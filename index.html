@@ -7,149 +7,154 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   :root {
-    --bg: #0a0d14;
-    --bg-soft: #12161f;
-    --card: #1a1f2b;
-    --line: #262c3a;
-    --text: #e8ecf4;
-    --muted: #8a93a6;
-    --accent: #7c9cff;
-    --accent-warm: #ffb87c;
-    --good: #7cd4a0;
-    --bad: #ff7c8a;
-    --warm: #ffb87c;
+    --bg: #0a0d14; --bg-soft: #12161f; --card: #1a1f2b; --line: #262c3a;
+    --text: #e8ecf4; --muted: #8a93a6; --accent: #7c9cff;
+    --accent-warm: #ffb87c; --good: #7cd4a0; --bad: #ff7c8a; --warm: #ffb87c;
   }
   html, body { height:100%; }
   body {
     font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    overflow-x: hidden;
-    line-height: 1.5;
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
+    background: var(--bg); color: var(--text); overflow-x:hidden;
+    line-height:1.5; font-size:16px; -webkit-font-smoothing:antialiased;
   }
-  #app { max-width: 640px; margin: 0 auto; min-height: 100vh; padding: 24px 20px 40px; }
-
-  .screen { display: none; animation: fadeIn 0.4s ease; }
-  .screen.active { display: block; }
-  @keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
-
-  h1 { font-size: 1.9rem; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 12px; }
-  h2 { font-size: 1.3rem; font-weight: 500; margin-bottom: 16px; }
-  h3 { font-size: 0.72rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
-  p { color: var(--text); margin-bottom: 14px; }
-  .muted { color: var(--muted); }
-
+  #app { max-width:640px; margin:0 auto; min-height:100vh; padding:24px 20px 40px; }
+  .screen { display:none; animation:fadeIn 0.4s ease; }
+  .screen.active { display:block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  h1 { font-size:1.9rem; font-weight:500; letter-spacing:-0.02em; margin-bottom:12px; }
+  h2 { font-size:1.3rem; font-weight:500; margin-bottom:16px; }
+  h3 { font-size:0.72rem; font-weight:500; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px; }
+  p { color:var(--text); margin-bottom:14px; }
+  .muted { color:var(--muted); }
   button {
-    font-family: inherit; font-size: 1rem; border: none;
-    background: var(--accent); color: #0a0d14;
-    padding: 14px 24px; border-radius: 12px; cursor: pointer;
-    width: 100%; font-weight: 500;
-    transition: opacity 0.15s, transform 0.1s;
+    font-family:inherit; font-size:1rem; border:none; background:var(--accent);
+    color:#0a0d14; padding:14px 24px; border-radius:12px; cursor:pointer;
+    width:100%; font-weight:500; transition:opacity 0.15s, transform 0.1s;
   }
-  button:active { transform: scale(0.98); }
-  button:disabled { opacity: 0.4; cursor: not-allowed; }
-  button.ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
-  button.small { padding: 10px 16px; font-size: 0.9rem; width: auto; }
-
+  button:active { transform:scale(0.98); }
+  button.ghost { background:transparent; color:var(--muted); border:1px solid var(--line); }
   .welcome-tag {
-    display: inline-block; font-size: 0.75rem; color: var(--accent-warm);
-    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 20px;
+    display:inline-block; font-size:0.75rem; color:var(--accent-warm);
+    letter-spacing:0.15em; text-transform:uppercase; margin-bottom:20px;
   }
   .welcome-intro {
-    margin-top: 32px; padding: 20px; background: var(--bg-soft);
-    border-radius: 14px; border-left: 2px solid var(--accent);
-    font-size: 0.95rem; color: var(--muted);
+    margin-top:32px; padding:20px; background:var(--bg-soft);
+    border-radius:14px; border-left:2px solid var(--accent);
+    font-size:0.95rem; color:var(--muted);
   }
-
-  .progress-bar { height: 3px; background: var(--line); border-radius: 2px; margin-bottom: 28px; overflow: hidden; }
-  .progress-fill { height: 100%; background: var(--accent); transition: width 0.4s ease; }
-  .progress-label { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); margin-bottom: 8px; }
-
-  .question-text { font-size: 1.15rem; line-height: 1.45; margin: 24px 0 24px; font-weight: 400; }
+  .scene-meta {
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:0.75rem; color:var(--muted); margin-bottom:20px;
+    text-transform:uppercase; letter-spacing:0.08em;
+  }
+  .scene-context {
+    background:var(--bg-soft); border-radius:14px; padding:22px;
+    margin-bottom:22px; line-height:1.55; font-size:1.05rem;
+    border-left:2px solid var(--accent-warm);
+  }
   .option {
-    display: block; padding: 16px 18px; background: var(--bg-soft);
-    border: 1px solid var(--line); border-radius: 12px;
-    margin-bottom: 10px; cursor: pointer; transition: all 0.15s;
-    font-size: 0.95rem; line-height: 1.4; text-align: left;
-    color: var(--text); width: 100%; font-family: inherit;
+    display:block; padding:16px 18px; background:var(--bg-soft);
+    border:1px solid var(--line); border-radius:12px; margin-bottom:10px;
+    cursor:pointer; transition:all 0.15s; font-size:0.95rem; line-height:1.4;
+    text-align:left; color:var(--text); width:100%; font-family:inherit;
   }
-  .option:hover { border-color: var(--accent); background: #151a26; }
-
-  .profile-card { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 16px; padding: 22px; margin-bottom: 16px; }
-  .profile-type { font-size: 1.4rem; font-weight: 500; color: var(--accent); margin-bottom: 6px; }
-  .profile-sub { font-size: 0.9rem; color: var(--muted); margin-bottom: 18px; }
-  .params { margin-top: 12px; }
-  .param-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 0.88rem; }
-  .param-name { flex: 0 0 42%; color: var(--muted); }
-  .param-bar { flex: 1; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
-  .param-fill { height: 100%; background: var(--accent); transition: width 0.5s ease; }
-  .param-val { flex: 0 0 auto; font-variant-numeric: tabular-nums; color: var(--text); font-size: 0.85rem; min-width: 26px; text-align: right; }
-  .delta { font-size: 0.8rem; margin-left: 6px; }
-  .delta.up { color: var(--good); }
-  .delta.down { color: var(--bad); }
-
-  .scene-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--muted); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.08em; }
-  .scene-context { background: var(--bg-soft); border-radius: 14px; padding: 22px; margin-bottom: 22px; line-height: 1.55; font-size: 1rem; border-left: 2px solid var(--accent-warm); }
-
+  .option:hover { border-color:var(--accent); background:#151a26; }
+  .insight-box {
+    background:rgba(124,156,255,0.08); border:1px solid rgba(124,156,255,0.25);
+    border-radius:14px; padding:20px; margin-bottom:20px;
+    font-size:1rem; line-height:1.55; color:#d6def0;
+    animation:fadeIn 0.5s ease;
+  }
+  .insight-box::before {
+    content:"—"; display:block; color:var(--accent);
+    font-size:0.7rem; letter-spacing:0.1em; margin-bottom:8px;
+  }
+  .portrait-card {
+    background:var(--bg-soft); border:1px solid var(--line);
+    border-radius:16px; padding:24px; margin-bottom:16px;
+  }
+  .portrait-title { font-size:1.3rem; font-weight:500; margin-bottom:18px; }
+  .portrait-list { list-style:none; padding:0; }
+  .portrait-list li {
+    padding:12px 0 12px 24px; position:relative;
+    font-size:0.98rem; line-height:1.5; color:var(--text);
+    border-bottom:1px solid var(--line);
+  }
+  .portrait-list li:last-child { border-bottom:none; }
+  .portrait-list li::before {
+    content:"—"; position:absolute; left:0; color:var(--accent-warm);
+  }
+  .portrait-note {
+    font-size:0.9rem; color:var(--muted); margin-top:18px;
+    padding-top:18px; border-top:1px solid var(--line);
+  }
+  .check-row {
+    display:flex; align-items:center; gap:12px; padding:10px 0;
+    cursor:pointer; font-size:0.92rem;
+  }
+  .check-row input { width:18px; height:18px; accent-color:var(--accent); }
   .partner-line {
-    background: rgba(124,156,255,0.06); border: 1px solid rgba(124,156,255,0.2);
-    border-radius: 14px; padding: 18px 20px; margin-bottom: 22px;
-    font-style: italic; color: #c9d2e8; font-size: 0.98rem; line-height: 1.5;
+    background:rgba(124,156,255,0.06); border:1px solid rgba(124,156,255,0.2);
+    border-radius:14px; padding:18px 20px; margin-bottom:22px;
+    font-style:italic; color:#c9d2e8; font-size:0.98rem; line-height:1.5;
   }
   .partner-line::before {
-    content: "— партнёр"; display: block; font-style: normal;
-    font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em;
-    text-transform: uppercase; margin-bottom: 8px;
+    content:"— партнёр"; display:block; font-style:normal;
+    font-size:0.7rem; color:var(--muted); letter-spacing:0.1em;
+    text-transform:uppercase; margin-bottom:8px;
   }
-
-  .report-section { background: var(--bg-soft); border-radius: 14px; padding: 20px; margin-bottom: 14px; }
-  .report-section h3 { color: var(--accent); margin-bottom: 12px; }
-  .report-text { font-size: 0.95rem; line-height: 1.6; color: var(--text); }
-  .report-list { list-style: none; padding: 0; }
-  .report-list li { padding: 10px 0 10px 20px; position: relative; font-size: 0.92rem; line-height: 1.5; color: var(--text); }
-  .report-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
-
-  .history-item { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin-bottom: 10px; cursor: pointer; transition: border-color 0.15s; }
-  .history-item:hover { border-color: var(--accent); }
-  .history-date { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
-  .history-title { font-size: 0.95rem; }
-
-  .actions { margin-top: 24px; display: flex; gap: 10px; }
-  .actions button { flex: 1; }
-  .back-link { background: none; border: none; color: var(--muted); font-size: 0.85rem; padding: 8px 0; cursor: pointer; width: auto; margin-bottom: 16px; }
-  .back-link:active { transform: none; }
-
+  .params { margin-top:12px; }
+  .param-row { display:flex; align-items:center; gap:12px; margin-bottom:12px; font-size:0.88rem; }
+  .param-name { flex:0 0 42%; color:var(--muted); }
+  .param-bar { flex:1; height:6px; background:var(--line); border-radius:3px; overflow:hidden; }
+  .param-fill { height:100%; background:var(--accent); transition:width 0.5s ease; }
+  .param-val { flex:0 0 auto; font-variant-numeric:tabular-nums; color:var(--text); font-size:0.85rem; min-width:26px; text-align:right; }
+  .delta { font-size:0.8rem; margin-left:6px; }
+  .delta.up { color:var(--good); }
+  .delta.down { color:var(--bad); }
+  .actions { margin-top:24px; display:flex; gap:10px; }
+  .actions button { flex:1; }
+  .back-link {
+    background:none; border:none; color:var(--muted); font-size:0.85rem;
+    padding:8px 0; cursor:pointer; width:auto; margin-bottom:16px;
+  }
   .input-field {
-    width: 100%; padding: 14px 16px; background: var(--bg);
-    border: 1px solid var(--line); border-radius: 10px;
-    color: var(--text); font-size: 1rem; font-family: inherit; outline: none;
+    width:100%; padding:14px 16px; background:var(--bg);
+    border:1px solid var(--line); border-radius:10px;
+    color:var(--text); font-size:1rem; font-family:inherit; outline:none;
   }
-  .input-field:focus { border-color: var(--accent); }
-
-  /* Карта выборов в отчёте */
-  .choice-map { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .input-field:focus { border-color:var(--accent); }
+  .report-section { background:var(--bg-soft); border-radius:14px; padding:20px; margin-bottom:14px; }
+  .report-section h3 { color:var(--accent); margin-bottom:12px; }
+  .report-text { font-size:0.95rem; line-height:1.6; color:var(--text); }
+  .report-list { list-style:none; padding:0; }
+  .report-list li { padding:10px 0 10px 20px; position:relative; font-size:0.92rem; line-height:1.5; color:var(--text); }
+  .report-list li::before { content:"→"; position:absolute; left:0; color:var(--accent); }
+  .history-item {
+    background:var(--bg-soft); border:1px solid var(--line); border-radius:12px;
+    padding:16px 18px; margin-bottom:10px; cursor:pointer; transition:border-color 0.15s;
+  }
+  .history-item:hover { border-color:var(--accent); }
+  .history-date { font-size:0.78rem; color:var(--muted); margin-bottom:6px; }
+  .history-title { font-size:0.95rem; }
+  .choice-map { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
   .choice-dot {
-    width: 26px; height: 26px; border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.7rem; color: #0a0d14; font-weight: 600;
-    background: var(--line);
+    width:26px; height:26px; border-radius:8px; display:flex;
+    align-items:center; justify-content:center; font-size:0.7rem;
+    color:#0a0d14; font-weight:600; background:var(--line);
   }
-  .choice-dot.honest { background: var(--good); }
-  .choice-dot.avoid { background: var(--bad); }
-  .choice-dot.aggr { background: var(--warm); }
-  .choice-dot.compromise { background: var(--accent); }
-  .choice-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; font-size: 0.75rem; color: var(--muted); }
-  .legend-item { display: flex; align-items: center; gap: 6px; }
-  .legend-box { width: 10px; height: 10px; border-radius: 3px; }
-
-  /* Динамика партнёра */
-  .partner-track { display: flex; align-items: center; gap: 2px; margin-top: 12px; }
-  .track-segment { flex: 1; height: 4px; background: var(--line); border-radius: 2px; }
-  .track-segment.warm { background: var(--good); }
-  .track-segment.cold { background: var(--bad); }
-  .track-segment.neutral { background: var(--muted); }
+  .choice-dot.honest { background:var(--good); }
+  .choice-dot.avoid { background:var(--bad); }
+  .choice-dot.aggr { background:var(--warm); }
+  .choice-dot.compromise { background:var(--accent); }
+  .choice-legend { display:flex; gap:14px; flex-wrap:wrap; margin-top:12px; font-size:0.75rem; color:var(--muted); }
+  .legend-item { display:flex; align-items:center; gap:6px; }
+  .legend-box { width:10px; height:10px; border-radius:3px; }
+  .partner-track { display:flex; align-items:center; gap:2px; margin-top:12px; }
+  .track-segment { flex:1; height:4px; background:var(--line); border-radius:2px; }
+  .track-segment.warm { background:var(--good); }
+  .track-segment.cold { background:var(--bad); }
+  .track-segment.neutral { background:var(--muted); }
 </style>
 </head>
 <body>
@@ -158,57 +163,75 @@
   <section class="screen active" id="screen-welcome">
     <span class="welcome-tag">Вторая жизнь</span>
     <h1>Симулятор<br>твоих решений</h1>
-    <p class="muted">Это не игра в привычном смысле. Здесь нет победы и поражения. Есть только ты, твой персонаж и ситуации, которые ты, возможно, узнаешь.</p>
+    <p class="muted">Пять ситуаций. Три минуты. В конце — то, что мы заметили о тебе. Не диагноз, а карта.</p>
     <div class="welcome-intro">
-      Сначала — короткий тест. Он определит, как ты обычно строишь отношения. Затем ты создашь персонажа на основе своего профиля и проживёшь 15 сцен. В конце — отчёт, который ты сможешь применить в реальной жизни.
+      Это не тест. Здесь нет правильных ответов. Есть только ты и то, что происходит внутри, когда ты читаешь эти сцены.
     </div>
     <div class="actions">
-      <button onclick="startTest()">Начать</button>
+      <button onclick="startEntry()">Начать</button>
     </div>
   </section>
 
-  <section class="screen" id="screen-test">
-    <div class="progress-label">
-      <span>Входное тестирование</span>
-      <span id="testProgress">1 / 20</span>
+  <!-- ВХОД: 5 СЦЕН -->
+  <section class="screen" id="screen-entry">
+    <div class="scene-meta">
+      <span id="entryNumber">Ситуация 1 / 5</span>
+      <span id="entrySphere">отношения</span>
     </div>
-    <div class="progress-bar"><div class="progress-fill" id="testFill" style="width:5%"></div></div>
-    <div class="question-text" id="questionText"></div>
-    <div id="optionsContainer"></div>
+    <div class="scene-context" id="entryText"></div>
+    <div id="entryOptions"></div>
+    <div id="entryInsight" style="display:none;">
+      <div class="insight-box" id="insightText"></div>
+      <div class="actions">
+        <button onclick="nextEntry()" id="entryNextBtn">Далее</button>
+      </div>
+    </div>
   </section>
 
-  <section class="screen" id="screen-profile">
-    <h2>Твой профиль</h2>
-    <div class="profile-card">
-      <div class="profile-type" id="profileType">—</div>
-      <div class="profile-sub" id="profileSub">—</div>
-      <p class="muted" id="profileDesc" style="font-size:0.92rem; margin:0;"></p>
-    </div>
-    <div class="profile-card">
-      <h3>Начальные параметры</h3>
-      <div class="params" id="profileParams"></div>
+  <!-- ЭКРАН УЗНАВАНИЯ -->
+  <section class="screen" id="screen-recognition">
+    <h2>Вот что мы заметили</h2>
+    <div class="portrait-card">
+      <div class="portrait-title" id="portraitTitle">—</div>
+      <ul class="portrait-list" id="portraitList"></ul>
+      <div class="portrait-note">
+        Это не диагноз. Это карта. Если что-то не совпало — скажи.
+      </div>
     </div>
     <div class="actions">
-      <button onclick="goToCharacter()">Создать персонажа</button>
+      <button onclick="goToCharacter()">Это про меня</button>
+    </div>
+    <div class="actions" style="margin-top:10px;">
+      <button class="ghost" onclick="openClarify()">Не совсем</button>
     </div>
   </section>
 
+  <!-- УТОЧНЕНИЕ -->
+  <section class="screen" id="screen-clarify">
+    <button class="back-link" onclick="show('screen-recognition')">← назад</button>
+    <h2>Давай уточним</h2>
+    <p class="muted" style="font-size:0.92rem;">Три коротких ситуации. Они помогут точнее увидеть карту.</p>
+    <div id="clarifyContent"></div>
+  </section>
+
+  <!-- ПЕРСОНАЖ -->
   <section class="screen" id="screen-character">
-    <h2>Создай персонажа</h2>
-    <p class="muted">Этот персонаж — твоё отражение. Не идеальный герой, а тот, кто ты есть сейчас.</p>
-    <div class="profile-card" style="margin-top:20px;">
-      <h3>Имя персонажа</h3>
-      <input type="text" id="charName" class="input-field" placeholder="Введи имя..." maxlength="20">
+    <h2>Теперь у тебя есть карта</h2>
+    <p class="muted">Давай попробуем прожить одну из этих ситуаций — но не как ты, а как персонаж, которому можно ошибаться.</p>
+    <div class="portrait-card" style="margin-top:20px;">
+      <h3>Как его зовут?</h3>
+      <input type="text" id="charName" class="input-field" placeholder="Имя персонажа..." maxlength="20">
     </div>
-    <div class="profile-card">
+    <div class="portrait-card">
       <h3>Партнёр в этой истории</h3>
       <p class="muted" style="font-size:0.9rem; margin:0;" id="partnerPreview">—</p>
     </div>
     <div class="actions">
-      <button onclick="startGame()" id="startGameBtn">Войти в первую сцену</button>
+      <button onclick="startGame()">Войти в первую сцену</button>
     </div>
   </section>
 
+  <!-- ИГРА -->
   <section class="screen" id="screen-game">
     <div class="scene-meta">
       <span id="sceneNumber">Сцена 1 / 15</span>
@@ -218,16 +241,17 @@
     <div id="gameOptions"></div>
     <div id="partnerReactionContainer" style="display:none;">
       <div class="partner-line" id="partnerReaction"></div>
-      <div class="profile-card" style="margin-top:16px;">
+      <div class="portrait-card" style="margin-top:16px;">
         <h3>Изменение параметров</h3>
         <div class="params" id="liveParams"></div>
       </div>
       <div class="actions">
-        <button onclick="nextScene()" id="nextBtn">Далее</button>
+        <button onclick="nextScene()">Далее</button>
       </div>
     </div>
   </section>
 
+  <!-- ОТЧЁТ -->
   <section class="screen" id="screen-report">
     <h2>Отчёт сессии</h2>
     <div id="reportContent"></div>
@@ -239,6 +263,7 @@
     </div>
   </section>
 
+  <!-- ИСТОРИЯ -->
   <section class="screen" id="screen-history">
     <button class="back-link" onclick="show('screen-welcome')">← назад</button>
     <h2>История сессий</h2>
@@ -249,543 +274,352 @@
 
 <script>
 // ============================================================================
-// ТЕСТ — 20 вопросов
+// ВХОДНЫЕ СЦЕНЫ (5 штук) — вместо 20 вопросов
 // ============================================================================
-const questions = [
-  { text: "Когда я был(а) ребёнком, в моей семье конфликты чаще всего…",
+const entryScenes = [
+  {
+    sphere: "отношения",
+    text: "Вы вместе полгода. Вечер, ты устал(а). Партнёр говорит: «Мне нужно побыть одному/одной сегодня». Что происходит внутри?",
     options: [
-      { text: "Замалчивались — все делали вид, что ничего не случилось.", w: { attach: {avoidant: 2}, pattern: {observer: 1}, U: -1 } },
-      { text: "Сопровождались громкими ссорами, криками и обидами.", w: { attach: {anxious: 2}, pattern: {victim: 1}, EQ: -1 } },
-      { text: "Обсуждались спокойно, и все приходили к общему решению.", w: { attach: {secure: 3}, pattern: {rescuer: 1}, EQ: 1, SG: 1 } },
-      { text: "Один человек всегда был прав, остальные подчинялись.", w: { attach: {avoidant: 1, anxious: 1}, pattern: {controller: 1}, U: -1 } },
-    ]},
-  { text: "Когда я чувствую, что меня критикуют, я чаще всего…",
+      { text: "«Он/она меня больше не любит» — и ты начинаешь искать подтверждения.",
+        w: { attach: {anxious: 3}, pattern: {victim: 1}, U: -2, EQ: 0, SG: 0 },
+        insight: "Ты из тех, кто ищет подтверждения, когда другой отстраняется. Это не слабость — это страх, который когда-то был защитой." },
+      { text: "«Наконец-то» — облегчение, а потом вина.",
+        w: { attach: {avoidant: 3}, pattern: {observer: 1}, U: 1, EQ: 0, SG: 0 },
+        insight: "Ты из тех, кому нужно пространство, но кто не уверен, что имеет на него право. Облегчение и вина приходят вместе." },
+      { text: "«Ок» — и ты правда спокойно занимаешься своими делами.",
+        w: { attach: {secure: 3}, pattern: {}, U: 2, EQ: 1, SG: 1 },
+        insight: "Ты умеешь оставаться собой, когда другой отдаляется. Это редкость — и это основа близости." },
+      { text: "Ничего не чувствуешь — просто киваешь.",
+        w: { attach: {avoidant: 2}, pattern: {observer: 2}, U: -1, EQ: -1, SG: 0 },
+        insight: "Ты не чувствуешь ничего — и это тоже способ защититься. Иногда чувства приходят позже." },
+    ]
+  },
+  {
+    sphere: "работа",
+    text: "Руководитель при всех говорит, что твоя идея слабая. Что ты делаешь?",
     options: [
-      { text: "Оправдываюсь или защищаюсь, даже если критика справедлива.", w: { attach: {anxious: 1}, pattern: {controller: 1}, EQ: -1, U: -1 } },
-      { text: "Соглашаюсь, но внутри чувствую обиду и злость.", w: { attach: {anxious: 1}, pattern: {victim: 1}, EQ: -1 } },
-      { text: "Слушаю, и если критика по делу — благодарю.", w: { attach: {secure: 2}, EQ: 2, U: 1 } },
-      { text: "Замыкаюсь и перестаю разговаривать.", w: { attach: {avoidant: 2}, pattern: {observer: 1}, U: -1 } },
-    ]},
-  { text: "В близких отношениях я чаще всего боюсь…",
+      { text: "Соглашаюсь вслух, но внутри кипит.",
+        w: { attach: {anxious: 1}, pattern: {victim: 2}, U: -1, EQ: -1, SG: 0 },
+        insight: "Ты соглашаешься вслух, но внутри кипит. Ты из тех, кто держит удар, а потом либо взрывается, либо уходит." },
+      { text: "Защищаюсь сразу, даже если не прав(а).",
+        w: { attach: {anxious: 1}, pattern: {controller: 3}, U: 1, EQ: -1, SG: -2 },
+        insight: "Ты защищаешься сразу. Это способ не чувствовать уязвимость. Но иногда он отталкивает тех, кто мог бы помочь." },
+      { text: "Спрашиваю, что именно слабое, и слушаю.",
+        w: { attach: {secure: 3}, pattern: {}, U: 1, EQ: 2, SG: 2 },
+        insight: "Ты спрашиваешь, а не защищаешься. Это редкая зрелость — и она открывает двери, которые защита закрывает." },
+      { text: "Молчу и потом избегаю этого человека.",
+        w: { attach: {avoidant: 3}, pattern: {observer: 1}, U: -1, EQ: 0, SG: -1 },
+        insight: "Ты молчишь и уходишь. Это способ не чувствовать боль — но и не чувствовать связь." },
+    ]
+  },
+  {
+    sphere: "дружба",
+    text: "Друг третий раз отменяет встречу в последний момент. Твоя реакция?",
     options: [
-      { text: "Что меня отвергнут, если я покажу свои настоящие чувства.", w: { attach: {anxious: 3}, U: -2 } },
-      { text: "Что я «потеряю себя» и растворюсь в партнёре.", w: { attach: {avoidant: 3}, U: 1 } },
-      { text: "Что я не оправдаю ожиданий и разочарую.", w: { attach: {anxious: 2}, pattern: {rescuer: 1}, U: -2 } },
-      { text: "Что меня предадут, как уже было.", w: { attach: {avoidant: 1, anxious: 1}, U: -1 } },
-    ]},
-  { text: "Когда я вижу, что близкий человек расстроен, я…",
+      { text: "Говорю, что всё ок, но внутри обида.",
+        w: { attach: {anxious: 1}, pattern: {victim: 2}, U: -1, EQ: -1, SG: 0 },
+        insight: "Ты говоришь «ок», когда это не так. Это способ сохранить мир — но не отношения." },
+      { text: "Пишу резко: «Если тебе не надо — так и скажи».",
+        w: { attach: {anxious: 1}, pattern: {controller: 2}, U: 1, EQ: -1, SG: -2 },
+        insight: "Ты отвечаешь резко. Это способ защитить себя от боли отвержения — но он создаёт ту боль, от которой защищает." },
+      { text: "Говорю: «Мне обидно. Давай обсудим».",
+        w: { attach: {secure: 3}, pattern: {}, U: 2, EQ: 2, SG: 2 },
+        insight: "Ты говоришь о своей обиде без обвинений. Это то, что строит близость, а не разрушает её." },
+      { text: "Просто перестаю предлагать встречаться.",
+        w: { attach: {avoidant: 3}, pattern: {observer: 1}, U: 0, EQ: 0, SG: -1 },
+        insight: "Ты перестаёшь предлагать. Это способ не чувствовать отвержение — но и не чувствовать связь." },
+    ]
+  },
+  {
+    sphere: "семья",
+    text: "Мама говорит: «Ты всегда был(а) сложным(ой) ребёнком». Что происходит внутри?",
     options: [
-      { text: "Стараюсь его утешить, даже если мне страшно или неловко.", w: { pattern: {rescuer: 2}, EQ: 1, U: -1 } },
-      { text: "Держу дистанцию, чтобы не «заразиться» его эмоциями.", w: { attach: {avoidant: 2}, pattern: {observer: 1} } },
-      { text: "Спрашиваю, что случилось, и слушаю без советов.", w: { attach: {secure: 2}, EQ: 2, SG: 1 } },
-      { text: "Чувствую вину и пытаюсь исправить ситуацию.", w: { pattern: {rescuer: 1, victim: 1}, U: -1 } },
-    ]},
-  { text: "Мне труднее всего…",
+      { text: "Чувствую вину и пытаюсь оправдаться.",
+        w: { attach: {anxious: 2}, pattern: {victim: 1, rescuer: 1}, U: -2, EQ: 0, SG: 0 },
+        insight: "Ты чувствуешь вину и оправдываешься. Это старая история — ты привык(ла) быть виноватым(ой) за чужую боль." },
+      { text: "Злюсь и отвечаю резко.",
+        w: { attach: {anxious: 1}, pattern: {controller: 2}, U: 0, EQ: -1, SG: -2 },
+        insight: "Ты злишься и отвечаешь резко. Это способ защитить себя от старой боли — но он оставляет тебя в ней." },
+      { text: "Замечаю, что это её история, а не моя.",
+        w: { attach: {secure: 3}, pattern: {}, U: 2, EQ: 3, SG: 1 },
+        insight: "Ты замечаешь, что это её история, а не твоя. Это огромный шаг — и он меняет всё." },
+      { text: "Ухожу в себя, ничего не говоря.",
+        w: { attach: {avoidant: 3}, pattern: {observer: 1}, U: -1, EQ: -1, SG: -1 },
+        insight: "Ты уходишь в себя. Это способ не чувствовать — но и не быть услышанным." },
+    ]
+  },
+  {
+    sphere: "одиночество",
+    text: "Воскресенье, вечер. Все куда-то идут, а ты дома. Что ты чувствуешь?",
     options: [
-      { text: "Просить о помощи, когда я в ней нуждаюсь.", w: { attach: {avoidant: 2}, U: -1 } },
-      { text: "Говорить «нет», когда меня о чём-то просят.", w: { attach: {anxious: 1}, pattern: {victim: 1}, U: -2 } },
-      { text: "Принимать комплименты искренне.", w: { U: -1, EQ: -1 } },
-      { text: "Начинать разговор о своих чувствах.", w: { attach: {avoidant: 1}, EQ: -2 } },
+      { text: "Тревогу — что со мной что-то не так.",
+        w: { attach: {anxious: 3}, pattern: {victim: 1}, U: -2, EQ: 0, SG: 0 },
+        insight: "Ты чувствуешь тревогу — что со мной что-то не так. Одиночество для тебя — это подтверждение, что ты не нужен(на)." },
+      { text: "Облегчение — наконец-то никого.",
+        w: { attach: {avoidant: 3}, pattern: {observer: 1}, U: 1, EQ: 0, SG: 0 },
+        insight: "Ты чувствуешь облегчение. Ты ценишь пространство — но иногда это способ не чувствовать тоску по близости." },
+      { text: "Спокойствие — мне хорошо с собой.",
+        w: { attach: {secure: 3}, pattern: {}, U: 2, EQ: 2, SG: 1 },
+        insight: "Ты спокоен(на) с собой. Это основа для близости — потому что ты не ищешь её из нужды." },
+      { text: "Пустоту — и не знаю, что с ней делать.",
+        w: { attach: {avoidant: 1}, pattern: {observer: 2}, U: -1, EQ: -1, SG: 0 },
+        insight: "Ты чувствуешь пустоту. Это не пустота — это место, где раньше что-то было. Иногда это начало." },
+    ]
+  }
+];
+
+// ============================================================================
+// УТОЧНЯЮЩИЕ ВОПРОСЫ (если нажали «не совсем»)
+// ============================================================================
+const clarifyQuestions = [
+  { text: "Когда близкий человек расстроен, я скорее…",
+    options: [
+      { text: "Стараюсь утешить, даже если мне неловко.", w: { pattern: {rescuer: 2}, EQ: 1 } },
+      { text: "Держу дистанцию, чтобы не заразиться.", w: { attach: {avoidant: 2}, pattern: {observer: 1} } },
+      { text: "Спрашиваю, что случилось, и слушаю.", w: { attach: {secure: 2}, EQ: 2, SG: 1 } },
+      { text: "Чувствую вину и пытаюсь исправить.", w: { pattern: {victim: 1, rescuer: 1}, U: -1 } },
     ]},
   { text: "Когда я злюсь на партнёра, я…",
     options: [
-      { text: "Подавляю злость и стараюсь быть «хорошим(ой)».", w: { pattern: {victim: 1, rescuer: 1}, U: -1, EQ: -1 } },
-      { text: "Выплёскиваю всё сразу, часто с обвинениями.", w: { pattern: {controller: 2}, EQ: -2, SG: -1 } },
-      { text: "Говорю о своих чувствах без обвинений.", w: { attach: {secure: 2}, EQ: 2, SG: 2 } },
-      { text: "Ухожу в себя и молчу, пока не остыну.", w: { attach: {avoidant: 2}, EQ: -1 } },
+      { text: "Подавляю злость и стараюсь быть удобным(ой).", w: { pattern: {victim: 2}, U: -1, EQ: -1 } },
+      { text: "Выплёскиваю всё сразу, с обвинениями.", w: { pattern: {controller: 2}, EQ: -2, SG: -1 } },
+      { text: "Говорю о чувствах без обвинений.", w: { attach: {secure: 2}, EQ: 2, SG: 2 } },
+      { text: "Ухожу в себя и молчу.", w: { attach: {avoidant: 2}, EQ: -1 } },
     ]},
-  { text: "Я склонен(а) думать, что…",
+  { text: "Мне труднее всего…",
     options: [
-      { text: "Мои потребности менее важны, чем потребности других.", w: { pattern: {victim: 2, rescuer: 1}, U: -2 } },
-      { text: "Я должен(а) всегда быть сильным(ой) и не показывать слабость.", w: { pattern: {controller: 1}, U: -1, EQ: -1 } },
-      { text: "Я имею право на свои чувства, даже если они неудобны другим.", w: { attach: {secure: 3}, U: 2, EQ: 1 } },
-      { text: "Другие не смогут понять меня по-настоящему.", w: { attach: {avoidant: 2}, U: -1 } },
-    ]},
-  { text: "Когда я вижу, что мой партнёр счастлив…",
-    options: [
-      { text: "Я радуюсь вместе с ним/ней, даже если сама не в настроении.", w: { pattern: {rescuer: 1}, EQ: 1 } },
-      { text: "Я чувствую лёгкую зависть или грусть.", w: { U: -1, EQ: -1 } },
-      { text: "Я радуюсь и делю его/её радость, это меня заряжает.", w: { attach: {secure: 2}, EQ: 2 } },
-      { text: "Я думаю, что это ненадолго.", w: { attach: {anxious: 1}, U: -1 } },
-    ]},
-  { text: "В детстве я чаще всего получал(а) похвалу за то, что…",
-    options: [
-      { text: "Был(а) послушным(ой) и удобным(ой).", w: { pattern: {victim: 1}, U: -1 } },
-      { text: "Достигал(а) высоких результатов (успеваемость, спорт).", w: { pattern: {controller: 1}, U: 1 } },
-      { text: "Помогал(а) другим или заботился(лась) о ком-то.", w: { pattern: {rescuer: 2}, EQ: 1 } },
-      { text: "Проявлял(а) инициативу или творчество.", w: { attach: {secure: 1}, U: 1, SG: 1 } },
-    ]},
-  { text: "Я могу сказать о себе, что…",
-    options: [
-      { text: "Мне трудно доверять людям, я часто жду подвоха.", w: { attach: {avoidant: 2}, U: -1 } },
-      { text: "Я легко сближаюсь и доверяю.", w: { attach: {secure: 2} } },
-      { text: "Я доверяю, но проверяю.", w: { attach: {secure: 1}, U: 1 } },
-      { text: "Я доверяю, но боюсь, что меня используют.", w: { attach: {anxious: 2}, U: -1 } },
-    ]},
-  { text: "Когда я принимаю важное решение, я…",
-    options: [
-      { text: "Долго сомневаюсь, советуюсь с другими и боюсь ошибиться.", w: { attach: {anxious: 1}, U: -1 } },
-      { text: "Решаю быстро, доверяя интуиции.", w: { U: 1, SG: 1 } },
-      { text: "Анализирую все за и против, но принимаю решение сам(а).", w: { attach: {secure: 2}, U: 2 } },
-      { text: "Часто передумываю после того, как решение уже принято.", w: { U: -2 } },
-    ]},
-  { text: "В конфликте я скорее…",
-    options: [
-      { text: "Уступаю, чтобы сохранить отношения.", w: { pattern: {victim: 1}, U: -1, SG: 1 } },
-      { text: "Настаиваю на своём, даже если рискую испортить отношения.", w: { pattern: {controller: 2}, U: 1, SG: -2 } },
-      { text: "Ищу компромисс, который устроит обоих.", w: { attach: {secure: 2}, SG: 2, EQ: 1 } },
-      { text: "Ухожу от конфликта, потому что не выношу напряжение.", w: { attach: {avoidant: 2}, SG: -1 } },
-    ]},
-  { text: "Когда я чувствую, что меня не понимают, я…",
-    options: [
-      { text: "Пытаюсь объяснить другими словами, снова и снова.", w: { attach: {anxious: 1}, EQ: 1 } },
-      { text: "Замыкаюсь и решаю, что меня не поймут никогда.", w: { attach: {avoidant: 2}, U: -1 } },
-      { text: "Злюсь на собеседника и обвиняю его в невнимательности.", w: { pattern: {controller: 1}, EQ: -2 } },
-      { text: "Меняю тему, чтобы избежать неприятных чувств.", w: { pattern: {observer: 1}, EQ: -1 } },
-    ]},
-  { text: "Я считаю, что в отношениях важнее всего…",
-    options: [
-      { text: "Честность и открытость.", w: { attach: {secure: 2}, EQ: 1 } },
-      { text: "Забота и поддержка.", w: { pattern: {rescuer: 1}, EQ: 1 } },
-      { text: "Взаимное уважение и свобода.", w: { attach: {secure: 2}, U: 1 } },
-      { text: "Стабильность и предсказуемость.", w: { attach: {avoidant: 1}, SG: -1 } },
-    ]},
-  { text: "Когда я вижу, что партнёр делает что-то не так, я…",
-    options: [
-      { text: "Молчу, чтобы не обидеть.", w: { pattern: {victim: 1}, U: -1 } },
-      { text: "Говорю прямо и жёстко.", w: { pattern: {controller: 1}, SG: -2 } },
-      { text: "Предлагаю помощь или делюсь своим опытом.", w: { pattern: {rescuer: 1}, EQ: 1, SG: 1 } },
-      { text: "Наблюдаю, позволяю ему/ей совершить ошибку и узнать из неё урок.", w: { attach: {secure: 1}, SG: 1 } },
-    ]},
-  { text: "Я лучше всего чувствую себя, когда…",
-    options: [
-      { text: "Я могу быть собой и меня принимают таким(ой), какой(ая) я есть.", w: { attach: {secure: 3}, U: 2 } },
-      { text: "Я нужен(а) кому-то и могу быть полезен(на).", w: { pattern: {rescuer: 2}, EQ: 1 } },
-      { text: "У меня есть личное пространство и свобода.", w: { attach: {avoidant: 2} } },
-      { text: "Всё идёт по плану и я контролирую ситуацию.", w: { pattern: {controller: 2}, U: 1 } },
-    ]},
-  { text: "Когда я слышу, что партнёр обсуждает меня с друзьями…",
-    options: [
-      { text: "Мне становится неловко, я боюсь, что он/она говорит обо мне плохо.", w: { attach: {anxious: 2}, U: -1 } },
-      { text: "Мне любопытно, я хочу знать, что он/она говорит.", w: { pattern: {controller: 1} } },
-      { text: "Я рад(а), что он/она делится, это часть близости.", w: { attach: {secure: 2}, EQ: 1 } },
-      { text: "Мне всё равно, мы отдельные личности.", w: { attach: {avoidant: 1} } },
-    ]},
-  { text: "Мои родители (или те, кто меня воспитывал)…",
-    options: [
-      { text: "Часто критиковали меня или сравнивали с другими.", w: { attach: {anxious: 2}, U: -2 } },
-      { text: "Скорее хвалили и поддерживали.", w: { attach: {secure: 2}, U: 1 } },
-      { text: "Были заняты своими делами, и я часто был(а) предоставлен(а) себе.", w: { attach: {avoidant: 2} } },
-      { text: "Были очень требовательны и ждали от меня многого.", w: { pattern: {controller: 1}, U: -1 } },
-    ]},
-  { text: "Я чаще всего выбираю партнёров, которые…",
-    options: [
-      { text: "Напоминают мне кого-то из родителей.", w: { attach: {anxious: 1} } },
-      { text: "Полная противоположность моим родителям.", w: { attach: {anxious: 1}, U: 0 } },
-      { text: "Сильные, надёжные и уверенные в себе.", w: { attach: {secure: 1}, U: 1 } },
-      { text: "Эмоциональные, чувствительные и ранимые.", w: { pattern: {rescuer: 1}, EQ: 1 } },
-    ]},
-  { text: "Если бы я мог(ла) изменить одну вещь в моих отношениях, это было бы…",
-    options: [
-      { text: "Больше открытости и честности.", w: { attach: {secure: 1}, EQ: 1 } },
-      { text: "Больше свободы и пространства.", w: { attach: {avoidant: 2} } },
-      { text: "Больше поддержки и понимания.", w: { attach: {anxious: 1}, EQ: 1 } },
-      { text: "Меньше страха и неуверенности.", w: { attach: {anxious: 1}, U: 1 } },
+      { text: "Просить о помощи.", w: { attach: {avoidant: 2}, U: -1 } },
+      { text: "Говорить «нет».", w: { pattern: {victim: 1}, U: -2 } },
+      { text: "Принимать комплименты.", w: { U: -1, EQ: -1 } },
+      { text: "Начинать разговор о чувствах.", w: { attach: {avoidant: 1}, EQ: -2 } },
     ]},
 ];
 
 // ============================================================================
-// 15 СЦЕНАРИЕВ
+// 15 ИГРОВЫХ СЦЕН (как было)
 // ============================================================================
-// Каждый выбор имеет "tag": honest / avoid / aggr / compromise — используется
-// для накопления истории и адаптации партнёра.
 const scenarios = [
-  {
-    id: "rel_01", title: "Тишина вместо ответа",
-    context: "Вы уже несколько месяцев вместе. Сегодня ты спросил(а) партнёра, как у него дела, и услышал(а) сухое: «Всё нормально». Но ты чувствуешь, что это не так. Внутри поднимается тревога.",
-    options: [
-      { tag: "honest", text: "Сказать: «Я чувствую, что что-то не так. Ты хочешь поговорить?»",
-        effects: { U: 5, EQ: 3, SG: 2 },
-        reaction: "Спасибо, что заметил(а). Я правда устал(а) и переживаю из-за работы. Мне важно, что ты спросил(а)." },
-      { tag: "avoid", text: "Промолчать и сделать вид, что ничего не заметил(а).",
-        effects: { U: -3, EQ: -1, SG: 0 },
-        reaction: "Партнёр замечает твоё молчание, но ничего не говорит. Между вами повисает лёгкая пустота." },
-      { tag: "avoid", text: "Начать шутить и отвлекать разговорами о погоде.",
-        effects: { U: -1, EQ: -2, SG: 1 },
-        reaction: "Партнёр улыбается, но ты чувствуешь, что он/она всё ещё далеко от тебя." },
-      { tag: "aggr", text: "Сказать с обидой: «Я вижу, что ты закрываешься. Скажи прямо, если не хочешь говорить».",
-        effects: { U: -2, EQ: -3, SG: -1 },
-        reaction: "Партнёр напрягается. «Я же сказал(а), что всё нормально». В воздухе повисает холод." },
-    ],
-  },
-  {
-    id: "rel_02", title: "Разговор о чувствах",
-    context: "Ты хочешь обсудить с партнёром, что тебе не хватает близости. Но каждый раз, когда ты начинаешь этот разговор, партнёр переводит тему или отвечает односложно.",
-    options: [
-      { tag: "honest", text: "Сказать прямо: «Мне важно поговорить о нас. Когда ты готов(а)?»",
-        effects: { U: 4, EQ: 2, SG: 2 },
-        reaction: "Партнёр вздыхает: «Хорошо. Давай в субботу утром, без спешки». Это уже шаг." },
-      { tag: "avoid", text: "Решить, что партнёр не хочет близости, и отстраниться.",
-        effects: { U: -3, EQ: -2, SG: -2 },
-        reaction: "Партнёр чувствует дистанцию, но не понимает, почему. Между вами растёт стена." },
-      { tag: "compromise", text: "Написать партнёру сообщение о своих чувствах, чтобы не смотреть в глаза.",
-        effects: { U: -1, EQ: 1, SG: 0 },
-        reaction: "Партнёр прочитал(а) и ответил(а): «Спасибо, что сказал(а). Мне нужно подумать»." },
-      { tag: "avoid", text: "Ничего не говорить и ждать, когда партнёр сам всё поймёт.",
-        effects: { U: -2, EQ: -1, SG: -1 },
-        reaction: "Партнёр ничего не замечает. Твоя невысказанная потребность остаётся с тобой." },
-    ],
-  },
-  {
-    id: "rel_03", title: "Просьба о помощи",
-    context: "Ты устал(а) и хочешь попросить партнёра о поддержке. Но внутри что-то мешает — кажется, что ты будешь обузой.",
-    options: [
-      { tag: "honest", text: "Сказать: «Я устал(а). Мне нужна твоя поддержка сегодня».",
-        effects: { U: 4, EQ: 3, SG: 2 },
-        reaction: "Партнёр обнимает тебя: «Конечно. Что я могу сделать?»" },
-      { tag: "avoid", text: "Промолчать и справиться самой.",
-        effects: { U: -2, EQ: -1, SG: -1 },
-        reaction: "Партнёр не знает, что тебе тяжело. Ты остаёшься один на один с усталостью." },
-      { tag: "avoid", text: "Намекнуть: «Сегодня был тяжёлый день...» — и ждать, что партнёр догадается.",
-        effects: { U: -1, EQ: 0, SG: 1 },
-        reaction: "Партнёр сочувственно кивает, но не предлагает помощь. Ты чувствуешь себя непонятой." },
-      { tag: "aggr", text: "Разозлиться на партнёра за то, что он/она не замечает твоего состояния.",
-        effects: { U: -2, EQ: -3, SG: -2 },
-        reaction: "Партнёр в недоумении: «Я не понимаю, что произошло». Вы ссоритесь." },
-    ],
-  },
-  {
-    id: "rel_04", title: "Ты говоришь «нет»",
-    context: "Партнёр просит тебя поехать с ним/ней на выходные к его/её родителям. Ты очень устал(а) и хочешь побыть одна. Но боишься отказать, чтобы не расстроить.",
-    options: [
-      { tag: "honest", text: "Честно сказать: «Я устал(а). Мне нужно это время для себя. Давай поедем в другой раз».",
-        effects: { U: 5, EQ: 2, SG: 3 },
-        reaction: "Партнёр сначала расстраивается, но потом говорит: «Хорошо. Я понимаю. Отдохни»." },
-      { tag: "avoid", text: "Согласиться, подавив своё желание.",
-        effects: { U: -3, EQ: -2, SG: -1 },
-        reaction: "Партнёр рад(а). А ты едешь с тяжёлым чувством внутри." },
-      { tag: "avoid", text: "Сказать «нет», но с длинными оправданиями и извинениями.",
-        effects: { U: -1, EQ: 0, SG: 0 },
-        reaction: "Партнёр соглашается, но ты чувствуешь себя виноватой ещё долго." },
-      { tag: "compromise", text: "Предложить компромисс: «Давай я приеду на один день, а не на все выходные».",
-        effects: { U: 3, EQ: 2, SG: 3 },
-        reaction: "Партнёр соглашается. Вы находите баланс между его желанием и твоей потребностью." },
-    ],
-  },
-  {
-    id: "rel_05", title: "Ревность",
-    context: "На вечеринке ты видишь, как твой партнёр оживлённо беседует с кем-то привлекательным. Ты чувствуешь укол ревности. Внутри нарастает напряжение.",
-    options: [
-      { tag: "honest", text: "Спокойно сказать партнёру после вечеринки: «Мне было немного некомфортно. Давай поговорим».",
-        effects: { U: 4, EQ: 3, SG: 2 },
-        reaction: "Партнёр удивлён(а), но отвечает: «Спасибо, что сказал(а) прямо. Мне важно, чтобы ты чувствовал(а) себя в безопасности»." },
-      { tag: "avoid", text: "Сделать вид, что всё в порядке, но молчать всю дорогу домой.",
-        effects: { U: -3, EQ: -2, SG: -2 },
-        reaction: "Партнёр чувствует напряжение, но не понимает его причин. Вы оба молчите." },
-      { tag: "aggr", text: "Устроить сцену прямо на вечеринке.",
-        effects: { U: -2, EQ: -4, SG: -3 },
-        reaction: "Партнёр смущён(а) и зол(а). Вы уходите раньше, ссорясь в машине." },
-      { tag: "compromise", text: "Понаблюдать за собой и заметить: «Это ревность. Она не про него, а про мой страх».",
-        effects: { U: 3, EQ: 4, SG: 1 },
-        reaction: "Ты не действуешь из ревности. Вечер заканчивается спокойно. Утром ты решаешь, стоит ли говорить об этом." },
-    ],
-  },
-  {
-    id: "rel_06", title: "Критика в твой адрес",
-    context: "Партнёр говорит: «Ты слишком эмоциональна. Тебя невозможно понять, когда ты так реагируешь». Ты чувствуешь укол обиды, но одновременно что-то важное в этих словах.",
-    options: [
-      { tag: "honest", text: "Ответить: «Мне обидно это слышать, но я хочу понять, что ты имеешь в виду. Расскажи подробнее».",
-        effects: { U: 4, EQ: 4, SG: 2 },
-        reaction: "Партнёр смягчается: «Прости. Я не хотел(а) тебя ранить. Просто мне трудно, когда я не понимаю, что с тобой»." },
-      { tag: "avoid", text: "Проглотить обиду и сказать: «Хорошо, я подумаю».",
-        effects: { U: -3, EQ: -2, SG: -1 },
-        reaction: "Партнёр кивает. Обида остаётся внутри и будет копиться." },
-      { tag: "aggr", text: "Ответить: «А ты сам(а) идеален(на)? Не тебе меня критиковать».",
-        effects: { U: 1, EQ: -4, SG: -3 },
-        reaction: "Партнёр отступает: «Я так и знал(а), что ты не услышишь». Разговор закончен." },
-      { tag: "compromise", text: "Сказать: «Мне нужно время, чтобы переварить это. Давай вернёмся к разговору вечером».",
-        effects: { U: 2, EQ: 2, SG: 2 },
-        reaction: "Партнёр соглашается: «Хорошо. Я тоже хочу поговорить спокойно»." },
-    ],
-  },
-  {
-    id: "rel_07", title: "Планы на будущее",
-    context: "Вы обсуждаете, где жить дальше. Ты хочешь остаться в городе, партнёр мечтает о переезде за границу. Разговор становится напряжённым.",
-    options: [
-      { tag: "honest", text: "Сказать: «Я боюсь переезда. Но я хочу услышать, что для тебя важно в этом решении».",
-        effects: { U: 4, EQ: 3, SG: 2 },
-        reaction: "Партнёр выдыхает: «Спасибо. Я тоже боюсь, что мы не сможем договориться. Давай искать вместе»." },
-      { tag: "avoid", text: "Сменить тему, чтобы не ссориться.",
-        effects: { U: -2, EQ: -2, SG: -1 },
-        reaction: "Партнёр замечает уход, но не настаивает. Проблема остаётся нерешённой." },
-      { tag: "aggr", text: "Сказать: «Если ты уедешь, значит, тебе плевать на нас».",
-        effects: { U: -1, EQ: -4, SG: -3 },
-        reaction: "Партнёр в шоке: «Как ты можешь так говорить?» Вы ссоритесь." },
-      { tag: "compromise", text: "Предложить: «Давай каждый напишет, что для него важно. Потом сравним».",
-        effects: { U: 3, EQ: 2, SG: 4 },
-        reaction: "Партнёр соглашается. Вы находите способ говорить о сложном без войны." },
-    ],
-  },
-  {
-    id: "rel_08", title: "Ты просишь поддержки",
-    context: "У тебя был тяжёлый день. Ты хочешь, чтобы партнёр просто был рядом. Но он/она занят(а) своими делами и не замечает твоего состояния.",
-    options: [
-      { tag: "honest", text: "Подойти и сказать: «Мне сейчас плохо. Можешь просто побыть со мной?»",
-        effects: { U: 4, EQ: 3, SG: 2 },
-        reaction: "Партнёр откладывает телефон: «Конечно. Иди сюда»." },
-      { tag: "avoid", text: "Ничего не говорить, чтобы не отвлекать.",
-        effects: { U: -3, EQ: -1, SG: -1 },
-        reaction: "Ты остаёшься один на один с тяжестью. Партнёр ничего не замечает." },
-      { tag: "aggr", text: "Раздражённо сказать: «Тебе вообще всё равно на меня».",
-        effects: { U: -2, EQ: -3, SG: -2 },
-        reaction: "Партнёр в недоумении: «С чего ты взял(а)? Я же здесь». Начинается ссора." },
-      { tag: "avoid", text: "Уйти в другую комнату и ждать, что партнёр догадается.",
-        effects: { U: -2, EQ: -2, SG: -2 },
-        reaction: "Партнёр не понимает, что произошло. Ты чувствуешь себя брошенной." },
-    ],
-  },
-  {
-    id: "rel_09", title: "Ты совершаешь ошибку",
-    context: "Ты забыл(а) о важной дате, которую партнёр ждал(а) с нетерпением. Он/она расстроен(а) и обижен(а). Ты чувствуешь вину.",
-    options: [
-      { tag: "honest", text: "Признать: «Я забыл(а). Мне очень жаль. Это моя ошибка, и я хочу её исправить».",
-        effects: { U: 3, EQ: 4, SG: 2 },
-        reaction: "Партнёр сначала молчит, потом говорит: «Спасибо, что не стал(а) искать оправдания. Мне это важно»." },
-      { tag: "avoid", text: "Найти оправдание: «У меня было столько дел, ты же знаешь».",
-        effects: { U: -3, EQ: -3, SG: -1 },
-        reaction: "Партнёр закрывается: «Понятно. Забудь»." },
-      { tag: "aggr", text: "Ответить: «А ты никогда ничего не забываешь?»",
-        effects: { U: -2, EQ: -4, SG: -3 },
-        reaction: "Партнёр холодно: «Значит, я тоже виноват(а)?» Разговор превращается в ссору." },
-      { tag: "compromise", text: "Сказать: «Я понимаю, что тебе больно. Давай я придумаю, как это исправить».",
-        effects: { U: 3, EQ: 3, SG: 3 },
-        reaction: "Партнёр смягчается: «Мне важно не наказать тебя, а почувствовать, что я важен(на) для тебя»." },
-    ],
-  },
-  {
-    id: "rel_10", title: "Партнёр в кризисе",
-    context: "У партнёра серьёзные проблемы на работе. Он/она замкнут(а), раздражён(а), и ты не знаешь, как помочь. Любая твоя попытка поддержать натыкается на стену.",
-    options: [
-      { tag: "honest", text: "Сказать: «Я вижу, что тебе тяжело. Я не знаю, что делать, но я рядом. Скажи, что тебе нужно».",
-        effects: { U: 4, EQ: 4, SG: 2 },
-        reaction: "Партнёр впервые за день выдыхает: «Просто побудь рядом. И не спрашивай ничего»." },
-      { tag: "avoid", text: "Отстраниться, чтобы не мешать, и заняться своими делами.",
-        effects: { U: -2, EQ: -2, SG: -2 },
-        reaction: "Партнёр чувствует себя ещё более одиноким. Стена растёт." },
-      { tag: "aggr", text: "Сказать: «Ты меня совсем не замечаешь. Я тоже человек».",
-        effects: { U: -1, EQ: -4, SG: -3 },
-        reaction: "Партнёр взрывается: «Мне сейчас не до тебя!» Вы ссоритесь в самый неподходящий момент." },
-      { tag: "compromise", text: "Молча сделать что-то полезное: приготовить ужин, убрать, оставить записку с поддержкой.",
-        effects: { U: 2, EQ: 3, SG: 2 },
-        reaction: "Партнёр вечером обнимает тебя: «Спасибо. Ты даже не представляешь, как это важно»." },
-    ],
-  },
-  {
-    id: "rel_11", title: "Разные потребности",
-    context: "Ты хочешь больше времени вместе, партнёр — больше личного пространства. Вы оба устали от напряжения и не понимаете, как найти баланс.",
-    options: [
-      { tag: "honest", text: "Сказать: «Мне нужно больше времени с тобой. Но я хочу услышать, сколько тебе нужно для себя».",
-        effects: { U: 4, EQ: 3, SG: 3 },
-        reaction: "Партнёр задумывается: «Спасибо, что спросил(а). Мне правда нужно больше один(одна). Но я не хочу тебя терять»." },
-      { tag: "avoid", text: "Согласиться на меньшее, чем нужно, чтобы не давить.",
-        effects: { U: -3, EQ: -1, SG: -1 },
-        reaction: "Партнёр доволен(на). А ты копишь обиду." },
-      { tag: "aggr", text: "Сказать: «Ты меня не любишь, если тебе нужно столько времени без меня».",
-        effects: { U: -2, EQ: -4, SG: -3 },
-        reaction: "Партнёр закрывается: «Значит, я всегда буду виноват(а)»." },
-      { tag: "compromise", text: "Предложить: «Давай попробуем расписание: два вечера вместе, два — каждый сам по себе».",
-        effects: { U: 3, EQ: 3, SG: 4 },
-        reaction: "Партнёр улыбается: «Это похоже на решение. Давай попробуем»." },
-    ],
-  },
-  {
-    id: "rel_12", title: "Прошлое всплывает",
-    context: "В разговоре партнёр упоминает твоё прошлое — то, что ты давно закрыл(а) и не хотел(а) бы возвращать. Ты чувствуешь, как внутри поднимается старая боль.",
-    options: [
-      { tag: "honest", text: "Сказать: «Мне больно это вспоминать. Я хочу, чтобы мы не возвращались к этому без необходимости».",
-        effects: { U: 4, EQ: 3, SG: 2 },
-        reaction: "Партнёр удивлён(а): «Прости, я не знал(а), что это до сих пор важно. Спасибо, что сказал(а)»." },
-      { tag: "avoid", text: "Смолчать и перевести тему, как будто всё нормально.",
-        effects: { U: -3, EQ: -2, SG: -1 },
-        reaction: "Партнёр ничего не замечает. Но ты не спишь ночью." },
-      { tag: "aggr", text: "Резко сказать: «Не смей копаться в моём прошлом!»",
-        effects: { U: -1, EQ: -4, SG: -3 },
-        reaction: "Партнёр отступает: «Я не хотел(а). Но ты сейчас закрылся(ась) от меня»." },
-      { tag: "compromise", text: "Сказать: «Я пока не готов(а) говорить об этом. Но я хочу, чтобы ты знал(а): это не про тебя».",
-        effects: { U: 3, EQ: 3, SG: 3 },
-        reaction: "Партнёр кивает: «Хорошо. Я рядом, когда ты будешь готов(а)»." },
-    ],
-  },
-  {
-    id: "rel_13", title: "Признание партнёра",
-    context: "Партнёр признаётся: «Я боюсь, что ты меня разлюбишь. Я знаю, что иногда веду себя странно из-за этого». Ты впервые слышишь это от него/неё так прямо.",
-    options: [
-      { tag: "honest", text: "Сказать: «Спасибо, что сказал(а). Мне важно это слышать. Я здесь, с тобой».",
-        effects: { U: 3, EQ: 4, SG: 3 },
-        reaction: "Партнёр выдыхает: «Я так долго боялся(лась) это сказать. Мне легче»." },
-      { tag: "avoid", text: "Сказать: «Не придумывай, всё нормально», чтобы закрыть тему.",
-        effects: { U: -2, EQ: -3, SG: -1 },
-        reaction: "Партнёр кивает, но ты чувствуешь, что он/она закрылся(ась)." },
-      { tag: "aggr", text: "Ответить: «Ты сам(а) виноват(а) в том, что так себя ведёшь».",
-        effects: { U: -1, EQ: -4, SG: -3 },
-        reaction: "Партнёр замолкает. То, что было открыто, закрывается надолго." },
-      { tag: "compromise", text: "Спросить: «Что я могу сделать, чтобы тебе было спокойнее со мной?»",
-        effects: { U: 3, EQ: 3, SG: 4 },
-        reaction: "Партнёр улыбается сквозь слёзы: «Просто будь рядом. И говори, когда тебе хорошо со мной»." },
-    ],
-  },
-  {
-    id: "rel_14", title: "Ты решаешь уйти",
-    context: "Ты чувствуешь, что отношения тебя истощают. Партнёр не хочет ничего менять. Внутри зреет решение — возможно, пора уходить. Но ты боишься ошибиться.",
-    options: [
-      { tag: "honest", text: "Сказать прямо: «Я думаю о том, чтобы уйти. Мне нужно честно поговорить с тобой об этом».",
-        effects: { U: 5, EQ: 3, SG: 2 },
-        reaction: "Партнёр бледнеет: «Я не ожидал(а). Дай мне время. Я хочу понять, можно ли что-то изменить»." },
-      { tag: "avoid", text: "Остаться из страха одиночества, ничего не меняя.",
-        effects: { U: -4, EQ: -2, SG: -2 },
-        reaction: "Внешне всё спокойно. Внутри ты продолжаешь угасать." },
-      { tag: "aggr", text: "Уйти молча, без объяснений, оставив записку.",
-        effects: { U: -2, EQ: -4, SG: -3 },
-        reaction: "Партнёр в шоке. Он/она пишет десятки сообщений, которые ты не читаешь. Остаётся незакрытый гештальт у обоих." },
-      { tag: "compromise", text: "Сказать: «Я не уверен(а), что хочу уйти. Но я точно не могу так продолжать. Давай попробуем разобраться вместе».",
-        effects: { U: 4, EQ: 3, SG: 4 },
-        reaction: "Партнёр кивает: «Хорошо. Я готов(а) попробовать. Если не получится — я пойму»." },
-    ],
-  },
-  {
-    id: "rel_15", title: "Прощание",
-    context: "Отношения закончились. Вы расстались несколько недель назад. Сегодня ты случайно встречаешь партнёра на улице. Внутри поднимается много всего.",
-    options: [
-      { tag: "honest", text: "Подойти и сказать: «Привет. Я рад(а) тебя видеть. Как ты?»",
-        effects: { U: 4, EQ: 3, SG: 3 },
-        reaction: "Партнёр улыбается: «Привет. Я тоже рад(а). У меня всё потихоньку. А ты?» Вы говорите несколько минут — тепло и без боли." },
-      { tag: "avoid", text: "Сделать вид, что не заметил(а), и пройти мимо.",
-        effects: { U: -2, EQ: -2, SG: -1 },
-        reaction: "Ты идёшь дальше, но внутри остаётся сожаление. Он/она тоже замечает тебя." },
-      { tag: "aggr", text: "Подойти и высказать всё, что не успел(а) сказать при расставании.",
-        effects: { U: -1, EQ: -4, SG: -3 },
-        reaction: "Партнёр выслушивает и говорит: «Мне жаль, что ты так и не отпустил(а). Мне пора». Разговор оставляет тяжёлый осадок." },
-      { tag: "compromise", text: "Улыбнуться и слегка кивнуть, не подходя.",
-        effects: { U: 3, EQ: 3, SG: 2 },
-        reaction: "Партнёр кивает в ответ. Вы расходитесь в разные стороны — спокойно, без боли. Ты чувствуешь: это завершено." },
-    ],
-  },
+  { id:"rel_01", title:"Тишина вместо ответа", context:"Вы уже несколько месяцев вместе. Сегодня ты спросил(а) партнёра, как у него дела, и услышал(а) сухое: «Всё нормально». Но ты чувствуешь, что это не так. Внутри поднимается тревога.",
+    options:[
+      { tag:"honest", text:"Сказать: «Я чувствую, что что-то не так. Ты хочешь поговорить?»", effects:{U:5,EQ:3,SG:2}, reaction:"Спасибо, что заметил(а). Я правда устал(а) и переживаю из-за работы. Мне важно, что ты спросил(а)." },
+      { tag:"avoid", text:"Промолчать и сделать вид, что ничего не заметил(а).", effects:{U:-3,EQ:-1,SG:0}, reaction:"Партнёр замечает твоё молчание, но ничего не говорит. Между вами повисает лёгкая пустота." },
+      { tag:"avoid", text:"Начать шутить и отвлекать разговорами о погоде.", effects:{U:-1,EQ:-2,SG:1}, reaction:"Партнёр улыбается, но ты чувствуешь, что он/она всё ещё далеко от тебя." },
+      { tag:"aggr", text:"Сказать с обидой: «Я вижу, что ты закрываешься. Скажи прямо, если не хочешь говорить».", effects:{U:-2,EQ:-3,SG:-1}, reaction:"Партнёр напрягается. «Я же сказал(а), что всё нормально». В воздухе повисает холод." },
+    ]},
+  { id:"rel_02", title:"Разговор о чувствах", context:"Ты хочешь обсудить с партнёром, что тебе не хватает близости. Но каждый раз, когда ты начинаешь этот разговор, партнёр переводит тему или отвечает односложно.",
+    options:[
+      { tag:"honest", text:"Сказать прямо: «Мне важно поговорить о нас. Когда ты готов(а)?»", effects:{U:4,EQ:2,SG:2}, reaction:"Партнёр вздыхает: «Хорошо. Давай в субботу утром, без спешки». Это уже шаг." },
+      { tag:"avoid", text:"Решить, что партнёр не хочет близости, и отстраниться.", effects:{U:-3,EQ:-2,SG:-2}, reaction:"Партнёр чувствует дистанцию, но не понимает, почему. Между вами растёт стена." },
+      { tag:"compromise", text:"Написать партнёру сообщение о своих чувствах, чтобы не смотреть в глаза.", effects:{U:-1,EQ:1,SG:0}, reaction:"Партнёр прочитал(а) и ответил(а): «Спасибо, что сказал(а). Мне нужно подумать»." },
+      { tag:"avoid", text:"Ничего не говорить и ждать, когда партнёр сам всё поймёт.", effects:{U:-2,EQ:-1,SG:-1}, reaction:"Партнёр ничего не замечает. Твоя невысказанная потребность остаётся с тобой." },
+    ]},
+  { id:"rel_03", title:"Просьба о помощи", context:"Ты устал(а) и хочешь попросить партнёра о поддержке. Но внутри что-то мешает — кажется, что ты будешь обузой.",
+    options:[
+      { tag:"honest", text:"Сказать: «Я устал(а). Мне нужна твоя поддержка сегодня».", effects:{U:4,EQ:3,SG:2}, reaction:"Партнёр обнимает тебя: «Конечно. Что я могу сделать?»" },
+      { tag:"avoid", text:"Промолчать и справиться самой.", effects:{U:-2,EQ:-1,SG:-1}, reaction:"Партнёр не знает, что тебе тяжело. Ты остаёшься один на один с усталостью." },
+      { tag:"avoid", text:"Намекнуть: «Сегодня был тяжёлый день...» — и ждать, что партнёр догадается.", effects:{U:-1,EQ:0,SG:1}, reaction:"Партнёр сочувственно кивает, но не предлагает помощь. Ты чувствуешь себя непонятой." },
+      { tag:"aggr", text:"Разозлиться на партнёра за то, что он/она не замечает твоего состояния.", effects:{U:-2,EQ:-3,SG:-2}, reaction:"Партнёр в недоумении: «Я не понимаю, что произошло». Вы ссоритесь." },
+    ]},
+  { id:"rel_04", title:"Ты говоришь «нет»", context:"Партнёр просит тебя поехать с ним/ней на выходные к его/её родителям. Ты очень устал(а) и хочешь побыть одна. Но боишься отказать, чтобы не расстроить.",
+    options:[
+      { tag:"honest", text:"Честно сказать: «Я устал(а). Мне нужно это время для себя. Давай поедем в другой раз».", effects:{U:5,EQ:2,SG:3}, reaction:"Партнёр сначала расстраивается, но потом говорит: «Хорошо. Я понимаю. Отдохни»." },
+      { tag:"avoid", text:"Согласиться, подавив своё желание.", effects:{U:-3,EQ:-2,SG:-1}, reaction:"Партнёр рад(а). А ты едешь с тяжёлым чувством внутри." },
+      { tag:"avoid", text:"Сказать «нет», но с длинными оправданиями и извинениями.", effects:{U:-1,EQ:0,SG:0}, reaction:"Партнёр соглашается, но ты чувствуешь себя виноватой ещё долго." },
+      { tag:"compromise", text:"Предложить компромисс: «Давай я приеду на один день, а не на все выходные».", effects:{U:3,EQ:2,SG:3}, reaction:"Партнёр соглашается. Вы находите баланс между его желанием и твоей потребностью." },
+    ]},
+  { id:"rel_05", title:"Ревность", context:"На вечеринке ты видишь, как твой партнёр оживлённо беседует с кем-то привлекательным. Ты чувствуешь укол ревности. Внутри нарастает напряжение.",
+    options:[
+      { tag:"honest", text:"Спокойно сказать партнёру после вечеринки: «Мне было немного некомфортно. Давай поговорим».", effects:{U:4,EQ:3,SG:2}, reaction:"Партнёр удивлён(а), но отвечает: «Спасибо, что сказал(а) прямо. Мне важно, чтобы ты чувствовал(а) себя в безопасности»." },
+      { tag:"avoid", text:"Сделать вид, что всё в порядке, но молчать всю дорогу домой.", effects:{U:-3,EQ:-2,SG:-2}, reaction:"Партнёр чувствует напряжение, но не понимает его причин. Вы оба молчите." },
+      { tag:"aggr", text:"Устроить сцену прямо на вечеринке.", effects:{U:-2,EQ:-4,SG:-3}, reaction:"Партнёр смущён(а) и зол(а). Вы уходите раньше, ссорясь в машине." },
+      { tag:"compromise", text:"Понаблюдать за собой и заметить: «Это ревность. Она не про него, а про мой страх».", effects:{U:3,EQ:4,SG:1}, reaction:"Ты не действуешь из ревности. Вечер заканчивается спокойно. Утром ты решаешь, стоит ли говорить об этом." },
+    ]},
+  { id:"rel_06", title:"Критика в твой адрес", context:"Партнёр говорит: «Ты слишком эмоциональна. Тебя невозможно понять, когда ты так реагируешь». Ты чувствуешь укол обиды, но одновременно что-то важное в этих словах.",
+    options:[
+      { tag:"honest", text:"Ответить: «Мне обидно это слышать, но я хочу понять, что ты имеешь в виду. Расскажи подробнее».", effects:{U:4,EQ:4,SG:2}, reaction:"Партнёр смягчается: «Прости. Я не хотел(а) тебя ранить. Просто мне трудно, когда я не понимаю, что с тобой»." },
+      { tag:"avoid", text:"Проглотить обиду и сказать: «Хорошо, я подумаю».", effects:{U:-3,EQ:-2,SG:-1}, reaction:"Партнёр кивает. Обида остаётся внутри и будет копиться." },
+      { tag:"aggr", text:"Ответить: «А ты сам(а) идеален(на)? Не тебе меня критиковать».", effects:{U:1,EQ:-4,SG:-3}, reaction:"Партнёр отступает: «Я так и знал(а), что ты не услышишь». Разговор закончен." },
+      { tag:"compromise", text:"Сказать: «Мне нужно время, чтобы переварить это. Давай вернёмся к разговору вечером».", effects:{U:2,EQ:2,SG:2}, reaction:"Партнёр соглашается: «Хорошо. Я тоже хочу поговорить спокойно»." },
+    ]},
+  { id:"rel_07", title:"Планы на будущее", context:"Вы обсуждаете, где жить дальше. Ты хочешь остаться в городе, партнёр мечтает о переезде за границу. Разговор становится напряжённым.",
+    options:[
+      { tag:"honest", text:"Сказать: «Я боюсь переезда. Но я хочу услышать, что для тебя важно в этом решении».", effects:{U:4,EQ:3,SG:2}, reaction:"Партнёр выдыхает: «Спасибо. Я тоже боюсь, что мы не сможем договориться. Давай искать вместе»." },
+      { tag:"avoid", text:"Сменить тему, чтобы не ссориться.", effects:{U:-2,EQ:-2,SG:-1}, reaction:"Партнёр замечает уход, но не настаивает. Проблема остаётся нерешённой." },
+      { tag:"aggr", text:"Сказать: «Если ты уедешь, значит, тебе плевать на нас».", effects:{U:-1,EQ:-4,SG:-3}, reaction:"Партнёр в шоке: «Как ты можешь так говорить?» Вы ссоритесь." },
+      { tag:"compromise", text:"Предложить: «Давай каждый напишет, что для него важно. Потом сравним».", effects:{U:3,EQ:2,SG:4}, reaction:"Партнёр соглашается. Вы находите способ говорить о сложном без войны." },
+    ]},
+  { id:"rel_08", title:"Ты просишь поддержки", context:"У тебя был тяжёлый день. Ты хочешь, чтобы партнёр просто был рядом. Но он/она занят(а) своими делами и не замечает твоего состояния.",
+    options:[
+      { tag:"honest", text:"Подойти и сказать: «Мне сейчас плохо. Можешь просто побыть со мной?»", effects:{U:4,EQ:3,SG:2}, reaction:"Партнёр откладывает телефон: «Конечно. Иди сюда»." },
+      { tag:"avoid", text:"Ничего не говорить, чтобы не отвлекать.", effects:{U:-3,EQ:-1,SG:-1}, reaction:"Ты остаёшься один на один с тяжестью. Партнёр ничего не замечает." },
+      { tag:"aggr", text:"Раздражённо сказать: «Тебе вообще всё равно на меня».", effects:{U:-2,EQ:-3,SG:-2}, reaction:"Партнёр в недоумении: «С чего ты взял(а)? Я же здесь». Начинается ссора." },
+      { tag:"avoid", text:"Уйти в другую комнату и ждать, что партнёр догадается.", effects:{U:-2,EQ:-2,SG:-2}, reaction:"Партнёр не понимает, что произошло. Ты чувствуешь себя брошенной." },
+    ]},
+  { id:"rel_09", title:"Ты совершаешь ошибку", context:"Ты забыл(а) о важной дате, которую партнёр ждал(а) с нетерпением. Он/она расстроен(а) и обижен(а). Ты чувствуешь вину.",
+    options:[
+      { tag:"honest", text:"Признать: «Я забыл(а). Мне очень жаль. Это моя ошибка, и я хочу её исправить».", effects:{U:3,EQ:4,SG:2}, reaction:"Партнёр сначала молчит, потом говорит: «Спасибо, что не стал(а) искать оправдания. Мне это важно»." },
+      { tag:"avoid", text:"Найти оправдание: «У меня было столько дел, ты же знаешь».", effects:{U:-3,EQ:-3,SG:-1}, reaction:"Партнёр закрывается: «Понятно. Забудь»." },
+      { tag:"aggr", text:"Ответить: «А ты никогда ничего не забываешь?»", effects:{U:-2,EQ:-4,SG:-3}, reaction:"Партнёр холодно: «Значит, я тоже виноват(а)?» Разговор превращается в ссору." },
+      { tag:"compromise", text:"Сказать: «Я понимаю, что тебе больно. Давай я придумаю, как это исправить».", effects:{U:3,EQ:3,SG:3}, reaction:"Партнёр смягчается: «Мне важно не наказать тебя, а почувствовать, что я важен(на) для тебя»." },
+    ]},
+  { id:"rel_10", title:"Партнёр в кризисе", context:"У партнёра серьёзные проблемы на работе. Он/она замкнут(а), раздражён(а), и ты не знаешь, как помочь. Любая твоя попытка поддержать натыкается на стену.",
+    options:[
+      { tag:"honest", text:"Сказать: «Я вижу, что тебе тяжело. Я не знаю, что делать, но я рядом. Скажи, что тебе нужно».", effects:{U:4,EQ:4,SG:2}, reaction:"Партнёр впервые за день выдыхает: «Просто побудь рядом. И не спрашивай ничего»." },
+      { tag:"avoid", text:"Отстраниться, чтобы не мешать, и заняться своими делами.", effects:{U:-2,EQ:-2,SG:-2}, reaction:"Партнёр чувствует себя ещё более одиноким. Стена растёт." },
+      { tag:"aggr", text:"Сказать: «Ты меня совсем не замечаешь. Я тоже человек».", effects:{U:-1,EQ:-4,SG:-3}, reaction:"Партнёр взрывается: «Мне сейчас не до тебя!» Вы ссоритесь в самый неподходящий момент." },
+      { tag:"compromise", text:"Молча сделать что-то полезное: приготовить ужин, убрать, оставить записку с поддержкой.", effects:{U:2,EQ:3,SG:2}, reaction:"Партнёр вечером обнимает тебя: «Спасибо. Ты даже не представляешь, как это важно»." },
+    ]},
+  { id:"rel_11", title:"Разные потребности", context:"Ты хочешь больше времени вместе, партнёр — больше личного пространства. Вы оба устали от напряжения и не понимаете, как найти баланс.",
+    options:[
+      { tag:"honest", text:"Сказать: «Мне нужно больше времени с тобой. Но я хочу услышать, сколько тебе нужно для себя».", effects:{U:4,EQ:3,SG:3}, reaction:"Партнёр задумывается: «Спасибо, что спросил(а). Мне правда нужно больше один(одна). Но я не хочу тебя терять»." },
+      { tag:"avoid", text:"Согласиться на меньшее, чем нужно, чтобы не давить.", effects:{U:-3,EQ:-1,SG:-1}, reaction:"Партнёр доволен(на). А ты копишь обиду." },
+      { tag:"aggr", text:"Сказать: «Ты меня не любишь, если тебе нужно столько времени без меня».", effects:{U:-2,EQ:-4,SG:-3}, reaction:"Партнёр закрывается: «Значит, я всегда буду виноват(а)»." },
+      { tag:"compromise", text:"Предложить: «Давай попробуем расписание: два вечера вместе, два — каждый сам по себе».", effects:{U:3,EQ:3,SG:4}, reaction:"Партнёр улыбается: «Это похоже на решение. Давай попробуем»." },
+    ]},
+  { id:"rel_12", title:"Прошлое всплывает", context:"В разговоре партнёр упоминает твоё прошлое — то, что ты давно закрыл(а) и не хотел(а) бы возвращать. Ты чувствуешь, как внутри поднимается старая боль.",
+    options:[
+      { tag:"honest", text:"Сказать: «Мне больно это вспоминать. Я хочу, чтобы мы не возвращались к этому без необходимости».", effects:{U:4,EQ:3,SG:2}, reaction:"Партнёр удивлён(а): «Прости, я не знал(а), что это до сих пор важно. Спасибо, что сказал(а)»." },
+      { tag:"avoid", text:"Смолчать и перевести тему, как будто всё нормально.", effects:{U:-3,EQ:-2,SG:-1}, reaction:"Партнёр ничего не замечает. Но ты не спишь ночью." },
+      { tag:"aggr", text:"Резко сказать: «Не смей копаться в моём прошлом!»", effects:{U:-1,EQ:-4,SG:-3}, reaction:"Партнёр отступает: «Я не хотел(а). Но ты сейчас закрылся(ась) от меня»." },
+      { tag:"compromise", text:"Сказать: «Я пока не готов(а) говорить об этом. Но я хочу, чтобы ты знал(а): это не про тебя».", effects:{U:3,EQ:3,SG:3}, reaction:"Партнёр кивает: «Хорошо. Я рядом, когда ты будешь готов(а)»." },
+    ]},
+  { id:"rel_13", title:"Признание партнёра", context:"Партнёр признаётся: «Я боюсь, что ты меня разлюбишь. Я знаю, что иногда веду себя странно из-за этого». Ты впервые слышишь это от него/неё так прямо.",
+    options:[
+      { tag:"honest", text:"Сказать: «Спасибо, что сказал(а). Мне важно это слышать. Я здесь, с тобой».", effects:{U:3,EQ:4,SG:3}, reaction:"Партнёр выдыхает: «Я так долго боялся(лась) это сказать. Мне легче»." },
+      { tag:"avoid", text:"Сказать: «Не придумывай, всё нормально», чтобы закрыть тему.", effects:{U:-2,EQ:-3,SG:-1}, reaction:"Партнёр кивает, но ты чувствуешь, что он/она закрылся(ась)." },
+      { tag:"aggr", text:"Ответить: «Ты сам(а) виноват(а) в том, что так себя ведёшь».", effects:{U:-1,EQ:-4,SG:-3}, reaction:"Партнёр замолкает. То, что было открыто, закрывается надолго." },
+      { tag:"compromise", text:"Спросить: «Что я могу сделать, чтобы тебе было спокойнее со мной?»", effects:{U:3,EQ:3,SG:4}, reaction:"Партнёр улыбается сквозь слёзы: «Просто будь рядом. И говори, когда тебе хорошо со мной»." },
+    ]},
+  { id:"rel_14", title:"Ты решаешь уйти", context:"Ты чувствуешь, что отношения тебя истощают. Партнёр не хочет ничего менять. Внутри зреет решение — возможно, пора уходить. Но ты боишься ошибиться.",
+    options:[
+      { tag:"honest", text:"Сказать прямо: «Я думаю о том, чтобы уйти. Мне нужно честно поговорить с тобой об этом».", effects:{U:5,EQ:3,SG:2}, reaction:"Партнёр бледнеет: «Я не ожидал(а). Дай мне время. Я хочу понять, можно ли что-то изменить»." },
+      { tag:"avoid", text:"Остаться из страха одиночества, ничего не меняя.", effects:{U:-4,EQ:-2,SG:-2}, reaction:"Внешне всё спокойно. Внутри ты продолжаешь угасать." },
+      { tag:"aggr", text:"Уйти молча, без объяснений, оставив записку.", effects:{U:-2,EQ:-4,SG:-3}, reaction:"Партнёр в шоке. Он/она пишет десятки сообщений, которые ты не читаешь. Остаётся незакрытый гештальт у обоих." },
+      { tag:"compromise", text:"Сказать: «Я не уверен(а), что хочу уйти. Но я точно не могу так продолжать. Давай попробуем разобраться вместе».", effects:{U:4,EQ:3,SG:4}, reaction:"Партнёр кивает: «Хорошо. Я готов(а) попробовать. Если не получится — я пойму»." },
+    ]},
+  { id:"rel_15", title:"Прощание", context:"Отношения закончились. Вы расстались несколько недель назад. Сегодня ты случайно встречаешь партнёра на улице. Внутри поднимается много всего.",
+    options:[
+      { tag:"honest", text:"Подойти и сказать: «Привет. Я рад(а) тебя видеть. Как ты?»", effects:{U:4,EQ:3,SG:3}, reaction:"Партнёр улыбается: «Привет. Я тоже рад(а). У меня всё потихоньку. А ты?» Вы говорите несколько минут — тепло и без боли." },
+      { tag:"avoid", text:"Сделать вид, что не заметил(а), и пройти мимо.", effects:{U:-2,EQ:-2,SG:-1}, reaction:"Ты идёшь дальше, но внутри остаётся сожаление. Он/она тоже замечает тебя." },
+      { tag:"aggr", text:"Подойти и высказать всё, что не успел(а) сказать при расставании.", effects:{U:-1,EQ:-4,SG:-3}, reaction:"Партнёр выслушивает и говорит: «Мне жаль, что ты так и не отпустил(а). Мне пора». Разговор оставляет тяжёлый осадок." },
+      { tag:"compromise", text:"Улыбнуться и слегка кивнуть, не подходя.", effects:{U:3,EQ:3,SG:2}, reaction:"Партнёр кивает в ответ. Вы расходитесь в разные стороны — спокойно, без боли. Ты чувствуешь: это завершено." },
+    ]},
 ];
 
 // ============================================================================
 // ПАРТНЁРЫ
 // ============================================================================
 const partners = {
-  secure: {
-    name: "Надёжный",
-    desc: "Открыт, эмпатичен, умеет говорить о чувствах. Создаёт безопасное пространство, но не терпит манипуляций.",
-    warmReaction: "Партнёр смотрит на тебя с теплом и говорит прямо, без игры.",
-    coldReaction: "Партнёр отстраняется, но не уходит — даёт тебе пространство.",
-  },
-  anxious: {
-    name: "Тревожный",
-    desc: "Ищет подтверждения, боится потери. Реагирует эмоционально, легко раним.",
-    warmReaction: "Партнёр явно расслабляется и становится ближе к тебе.",
-    coldReaction: "Партнёр замыкается в себе, но бросает на тебя тревожные взгляды.",
-  },
-  avoidant: {
-    name: "Избегающий",
-    desc: "Ценит свободу, боится «поглощения». Редко говорит о чувствах, дистанцируется под давлением.",
-    warmReaction: "Партнёр впервые смотрит на тебя иначе — с интересом.",
-    coldReaction: "Партнёр отворачивается и уходит в свои мысли. Ты чувствуешь стену.",
-  },
+  secure: { name:"Надёжный", desc:"Открыт, эмпатичен, умеет говорить о чувствах. Создаёт безопасное пространство, но не терпит манипуляций." },
+  anxious: { name:"Тревожный", desc:"Ищет подтверждения, боится потери. Реагирует эмоционально, легко раним." },
+  avoidant: { name:"Избегающий", desc:"Ценит свободу, боится «поглощения». Редко говорит о чувствах, дистанцируется под давлением." },
 };
 
 // ============================================================================
 // СОСТОЯНИЕ
 // ============================================================================
 let state = {
-  testAnswers: [],
-  currentQuestion: 0,
+  entryAnswers: [],
+  currentEntry: 0,
   profile: null,
-  character: { name: "", params: { U: 50, EQ: 50, SG: 50 } },
+  portrait: null,
+  character: { name:"", params:{U:50,EQ:50,SG:50} },
   partner: null,
   session: null,
   history: [],
+  clarifyActive: false,
+  clarifyAnswers: [],
 };
 
 // ============================================================================
 // УТИЛИТЫ
 // ============================================================================
 function saveState() {
-  try {
-    localStorage.setItem('second_life_state', JSON.stringify({ history: state.history }));
-  } catch(e) { console.warn('Save failed', e); }
+  try { localStorage.setItem('second_life_state', JSON.stringify({ history: state.history })); } catch(e) {}
 }
 function loadState() {
   try {
     const saved = localStorage.getItem('second_life_state');
-    if (saved) {
-      const data = JSON.parse(saved);
-      state.history = data.history || [];
-    }
-  } catch(e) { console.warn('Load failed', e); }
+    if (saved) { state.history = JSON.parse(saved).history || []; }
+  } catch(e) {}
 }
-function show(screenId) {
+function show(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(screenId).classList.add('active');
-  window.scrollTo(0, 0);
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
 }
 
 // ============================================================================
-// ТЕСТ
+// ВХОД — 5 СЦЕН
 // ============================================================================
-function startTest() {
-  state.currentQuestion = 0;
-  state.testAnswers = [];
-  renderQuestion();
-  show('screen-test');
+function startEntry() {
+  state.currentEntry = 0;
+  state.entryAnswers = [];
+  renderEntry();
+  show('screen-entry');
 }
 
-function renderQuestion() {
-  const q = questions[state.currentQuestion];
-  document.getElementById('testProgress').textContent = (state.currentQuestion + 1) + ' / ' + questions.length;
-  document.getElementById('testFill').style.width = ((state.currentQuestion + 1) / questions.length * 100) + '%';
-  document.getElementById('questionText').textContent = q.text;
-  const container = document.getElementById('optionsContainer');
-  container.innerHTML = '';
-  q.options.forEach((opt, i) => {
+function renderEntry() {
+  const s = entryScenes[state.currentEntry];
+  document.getElementById('entryNumber').textContent = `Ситуация ${state.currentEntry+1} / ${entryScenes.length}`;
+  document.getElementById('entrySphere').textContent = s.sphere;
+  document.getElementById('entryText').textContent = s.text;
+  const cont = document.getElementById('entryOptions');
+  cont.innerHTML = '';
+  cont.style.display = 'block';
+  s.options.forEach((opt, i) => {
     const btn = document.createElement('button');
     btn.className = 'option';
     btn.textContent = opt.text;
-    btn.onclick = () => selectAnswer(i);
-    container.appendChild(btn);
+    btn.onclick = () => selectEntry(i);
+    cont.appendChild(btn);
   });
+  document.getElementById('entryInsight').style.display = 'none';
 }
 
-function selectAnswer(index) {
-  state.testAnswers.push(index);
-  state.currentQuestion++;
-  if (state.currentQuestion < questions.length) {
-    renderQuestion();
+function selectEntry(i) {
+  const s = entryScenes[state.currentEntry];
+  const opt = s.options[i];
+  state.entryAnswers.push(i);
+  document.getElementById('entryOptions').style.display = 'none';
+  document.getElementById('insightText').textContent = opt.insight;
+  document.getElementById('entryInsight').style.display = 'block';
+  document.getElementById('entryNextBtn').textContent = 
+    state.currentEntry < entryScenes.length - 1 ? 'Далее' : 'Посмотреть, что мы заметили';
+}
+
+function nextEntry() {
+  state.currentEntry++;
+  if (state.currentEntry < entryScenes.length) {
+    renderEntry();
   } else {
-    computeProfile();
-    renderProfile();
-    show('screen-profile');
+    computeFastProfile();
+    generatePortrait();
+    renderRecognition();
+    show('screen-recognition');
   }
 }
 
-function computeProfile() {
+// ============================================================================
+// БЫСТРЫЙ ПРОФИЛЬ НА ОСНОВЕ 5 СЦЕН
+// ============================================================================
+function computeFastProfile() {
   const scores = {
-    attach: { secure: 0, anxious: 0, avoidant: 0 },
-    pattern: { victim: 0, rescuer: 0, controller: 0, observer: 0 },
+    attach: { secure:0, anxious:0, avoidant:0 },
+    pattern: { victim:0, rescuer:0, controller:0, observer:0 },
     U: 50, EQ: 50, SG: 50,
   };
-  state.testAnswers.forEach((answerIdx, qIdx) => {
-    const w = questions[qIdx].options[answerIdx].w || {};
+  state.entryAnswers.forEach((ansIdx, qIdx) => {
+    const w = entryScenes[qIdx].options[ansIdx].w || {};
     if (w.attach) for (const k in w.attach) scores.attach[k] += w.attach[k];
     if (w.pattern) for (const k in w.pattern) scores.pattern[k] += w.pattern[k];
-    if (w.U) scores.U += w.U * 3;
-    if (w.EQ) scores.EQ += w.EQ * 3;
-    if (w.SG) scores.SG += w.SG * 3;
+    if (w.U) scores.U += w.U * 4;
+    if (w.EQ) scores.EQ += w.EQ * 4;
+    if (w.SG) scores.SG += w.SG * 4;
   });
-  const attachType = Object.keys(scores.attach).reduce((a, b) => scores.attach[a] >= scores.attach[b] ? a : b);
-  const patternType = Object.keys(scores.pattern).reduce((a, b) => scores.pattern[a] >= scores.pattern[b] ? a : b);
+  const attachType = Object.keys(scores.attach).reduce((a,b) => scores.attach[a] >= scores.attach[b] ? a : b);
+  const patternType = Object.keys(scores.pattern).reduce((a,b) => scores.pattern[a] >= scores.pattern[b] ? a : b);
   const clamp = v => Math.max(10, Math.min(90, Math.round(v)));
   state.profile = {
     attachType, patternType,
@@ -795,45 +629,133 @@ function computeProfile() {
   state.character.params = { ...state.profile.params };
 }
 
-const attachNames = {
-  secure: { name: "Надёжный тип", sub: "Ты умеешь строить близкие отношения и оставаться собой." },
-  anxious: { name: "Тревожный тип", sub: "Ты сильно привязываешься и боишься потерять близость." },
-  avoidant: { name: "Избегающий тип", sub: "Ты ценишь независимость и держишь дистанцию в близости." },
-};
-const patternNames = {
-  victim: "Склонность уступать другим",
-  rescuer: "Склонность спасать других",
-  controller: "Склонность контролировать",
-  observer: "Склонность наблюдать со стороны",
-};
-const patternDescriptions = {
-  victim: "Ты часто ставишь чужие потребности выше своих. Тебе важно научиться замечать собственные желания и говорить о них.",
-  rescuer: "Ты заботишься о других, но иногда забываешь о себе. Твоя задача — научиться принимать поддержку так же, как ты её даёшь.",
-  controller: "Ты стараешься держать всё под контролем, чтобы чувствовать безопасность. Твоя задача — позволить жизни и людям быть непредсказуемыми.",
-  observer: "Ты часто находишься в стороне от собственных чувств. Твоя задача — приблизиться к себе и позволить эмоциям быть.",
+// ============================================================================
+// ГЕНЕРАЦИЯ ПОРТРЕТА
+// ============================================================================
+const portraitBank = {
+  anxious: [
+    "Ты замечаешь, когда что-то не так, но не говоришь об этом сразу.",
+    "Ты терпишь до точки, а потом либо взрываешься, либо уходишь.",
+    "Ты часто берёшь ответственность за чужие чувства.",
+    "Ты боишься, что если покажешь настоящее — тебя оставят.",
+    "Ты ищешь подтверждения, когда другой отстраняется.",
+  ],
+  avoidant: [
+    "Ты часто отстраняешься, когда чувствуешь давление.",
+    "Тебе нужно пространство, но ты не уверен(а), что имеешь на него право.",
+    "Ты не говоришь о чувствах — не потому что не чувствуешь, а потому что не знаешь как.",
+    "Облегчение и вина приходят у тебя вместе.",
+    "Ты молчишь, чтобы не ранить — но этим ранишь сильнее.",
+  ],
+  secure: [
+    "Ты умеешь оставаться собой в отношениях.",
+    "Ты говоришь о чувствах без обвинений.",
+    "Ты можешь быть один(одна) и не чувствовать пустоты.",
+    "Но иногда ты забываешь о своих потребностях, заботясь о других.",
+    "Ты редко просишь о помощи — даже когда она нужна.",
+  ],
 };
 
-function renderProfile() {
+function generatePortrait() {
   const p = state.profile;
-  const a = attachNames[p.attachType];
-  document.getElementById('profileType').textContent = a.name;
-  document.getElementById('profileSub').textContent = a.sub;
-  document.getElementById('profileDesc').textContent = patternNames[p.patternType] + '. ' + patternDescriptions[p.patternType];
-  document.getElementById('profileParams').innerHTML = renderParams(p.params);
+  const lines = [];
+  const primary = portraitBank[p.attachType] || [];
+  // Берём 3-4 из основного типа
+  lines.push(...primary.slice(0, 3));
+  
+  // Добавляем 1-2 из паттерна
+  const patternLines = {
+    victim: "Ты часто ставишь чужие потребности выше своих.",
+    rescuer: "Ты заботишься о других, но иногда забываешь о себе.",
+    controller: "Ты стараешься держать всё под контролем, чтобы чувствовать безопасность.",
+    observer: "Ты часто находишься в стороне от собственных чувств.",
+  };
+  if (patternLines[p.patternType]) lines.push(patternLines[p.patternType]);
+  
+  // Если смешанный тип — добавляем одну из второго
+  const sorted = Object.keys(p.scores.attach).sort((a,b) => p.scores.attach[b] - p.scores.attach[a]);
+  if (sorted[0] !== sorted[1] && p.scores.attach[sorted[1]] > 0) {
+    const secondary = portraitBank[sorted[1]];
+    if (secondary && secondary[3]) lines.push(secondary[3]);
+  }
+  
+  state.portrait = {
+    title: p.attachType === 'secure' ? 'Скорее всего, ты из тех, кто умеет быть рядом' :
+           p.attachType === 'anxious' ? 'Скорее всего, ты из тех, кто боится потерять' :
+           'Скорее всего, ты из тех, кому нужно пространство',
+    lines: lines.slice(0, 6),
+    allLines: lines,
+  };
 }
 
-function renderParams(params, deltas) {
-  const labels = { U: 'Уверенность', EQ: 'Эмоциональный интеллект', SG: 'Социальная гибкость' };
-  return Object.keys(labels).map(k => {
-    const v = params[k] || 0;
-    const d = deltas && deltas[k] ? deltas[k] : 0;
-    const dHtml = d !== 0 ? `<span class="delta ${d > 0 ? 'up' : 'down'}">${d > 0 ? '+' : ''}${d}</span>` : '';
-    return `<div class="param-row">
-      <span class="param-name">${labels[k]}</span>
-      <div class="param-bar"><div class="param-fill" style="width:${v}%"></div></div>
-      <span class="param-val">${v}${dHtml}</span>
-    </div>`;
-  }).join('');
+function renderRecognition() {
+  document.getElementById('portraitTitle').textContent = state.portrait.title;
+  document.getElementById('portraitList').innerHTML = state.portrait.lines.map(l => `<li>${l}</li>`).join('');
+}
+
+// ============================================================================
+// УТОЧНЕНИЕ
+// ============================================================================
+function openClarify() {
+  state.clarifyActive = true;
+  state.clarifyAnswers = [];
+  renderClarify();
+  show('screen-clarify');
+}
+
+function renderClarify() {
+  const cont = document.getElementById('clarifyContent');
+  cont.innerHTML = '';
+  clarifyQuestions.forEach((q, qi) => {
+    const block = document.createElement('div');
+    block.className = 'portrait-card';
+    block.innerHTML = `<h3>${q.text}</h3>`;
+    q.options.forEach((opt, oi) => {
+      const btn = document.createElement('button');
+      btn.className = 'option';
+      btn.textContent = opt.text;
+      btn.style.marginBottom = '8px';
+      btn.onclick = () => {
+        state.clarifyAnswers[qi] = oi;
+        block.querySelectorAll('.option').forEach(b => b.style.borderColor = 'var(--line)');
+        btn.style.borderColor = 'var(--accent)';
+        if (state.clarifyAnswers.filter(a => a !== undefined).length === clarifyQuestions.length) {
+          applyClarify();
+        }
+      };
+      block.appendChild(btn);
+    });
+    cont.appendChild(block);
+  });
+}
+
+function applyClarify() {
+  // Пересчитываем профиль с учётом уточнений
+  const scores = {
+    attach: { ...state.profile.scores.attach },
+    pattern: { ...state.profile.scores.pattern },
+    U: state.profile.params.U, EQ: state.profile.params.EQ, SG: state.profile.params.SG,
+  };
+  state.clarifyAnswers.forEach((ansIdx, qIdx) => {
+    const w = clarifyQuestions[qIdx].options[ansIdx].w || {};
+    if (w.attach) for (const k in w.attach) scores.attach[k] += w.attach[k];
+    if (w.pattern) for (const k in w.pattern) scores.pattern[k] += w.pattern[k];
+    if (w.U) scores.U += w.U * 3;
+    if (w.EQ) scores.EQ += w.EQ * 3;
+    if (w.SG) scores.SG += w.SG * 3;
+  });
+  const attachType = Object.keys(scores.attach).reduce((a,b) => scores.attach[a] >= scores.attach[b] ? a : b);
+  const patternType = Object.keys(scores.pattern).reduce((a,b) => scores.pattern[a] >= scores.pattern[b] ? a : b);
+  const clamp = v => Math.max(10, Math.min(90, Math.round(v)));
+  state.profile = {
+    attachType, patternType,
+    params: { U: clamp(scores.U), EQ: clamp(scores.EQ), SG: clamp(scores.SG) },
+    scores,
+  };
+  state.character.params = { ...state.profile.params };
+  generatePortrait();
+  renderRecognition();
+  show('screen-recognition');
 }
 
 // ============================================================================
@@ -857,30 +779,20 @@ function startGame() {
   const nameInput = document.getElementById('charName').value.trim();
   state.character.name = nameInput || 'Персонаж';
   state.character.params = { ...state.profile.params };
-  
   state.session = {
     scenarios: scenarios.slice(),
     currentScene: 0,
     choices: [],
     startParams: { ...state.character.params },
     startTime: new Date().toISOString(),
-    partnerHistory: [],     // накопленная история для адаптации
-    partnerWarmth: 0,        // -5..+5 — текущее "тепло" партнёра
-    partnerMood: 'neutral',  // warm / neutral / cold
+    partnerHistory: [],
+    partnerWarmth: 0,
+    partnerMood: 'neutral',
   };
   renderScene();
   show('screen-game');
 }
 
-// Классификация выбора по тегу
-function classifyChoice(tag) {
-  if (tag === 'honest') return 'honest';
-  if (tag === 'avoid') return 'avoid';
-  if (tag === 'aggr') return 'aggr';
-  return 'compromise';
-}
-
-// Обновление "тепла" партнёра на основе выбора
 function updatePartnerWarmth(tag) {
   const history = state.session.partnerHistory;
   history.push(tag);
@@ -890,91 +802,55 @@ function updatePartnerWarmth(tag) {
   else if (tag === 'avoid') delta = -0.5;
   else if (tag === 'aggr') delta = -1.5;
   state.session.partnerWarmth = Math.max(-5, Math.min(5, state.session.partnerWarmth + delta));
-  
-  // Определяем настроение партнёра
   const w = state.session.partnerWarmth;
   if (w >= 2) state.session.partnerMood = 'warm';
   else if (w <= -2) state.session.partnerMood = 'cold';
   else state.session.partnerMood = 'neutral';
-  
-  // Накопленные счётчики
-  const counts = { honest: 0, avoid: 0, aggr: 0, compromise: 0 };
+  const counts = { honest:0, avoid:0, aggr:0, compromise:0 };
   history.forEach(t => counts[t]++);
   return counts;
 }
 
-// Адаптивная реакция партнёра: комбинирует базовую реакцию с типом партнёра и накопленным настроением
-function adaptReaction(scene, choice, counts) {
+function adaptReaction(choice, counts) {
   const partner = state.partner;
   const mood = state.session.partnerMood;
   let base = choice.reaction;
   let addition = "";
-  
-  // Логика типа партнёра
   if (partner.type === 'avoidant') {
-    if (choice.tag === 'honest') {
-      addition = " Впервые за всё время партнёр не закрывается, а остаётся в контакте. Это редкость для него.";
-    } else if (choice.tag === 'aggr') {
-      addition = " Партнёр молча отворачивается — как всегда, когда чувствует давление.";
-    } else if (choice.tag === 'avoid') {
-      addition = " Партнёр вроде бы и не против, что вы оба молчите. Но что-то важное остаётся несказанным.";
-    } else if (choice.tag === 'compromise') {
-      addition = " Партнёр оценил(а) твой компромисс — но не сказал(а) об этом вслух.";
-    }
+    if (choice.tag === 'honest') addition = " Впервые за всё время партнёр не закрывается, а остаётся в контакте.";
+    else if (choice.tag === 'aggr') addition = " Партнёр молча отворачивается — как всегда, когда чувствует давление.";
+    else if (choice.tag === 'avoid') addition = " Партнёр вроде бы и не против, что вы оба молчите. Но что-то важное остаётся несказанным.";
+    else if (choice.tag === 'compromise') addition = " Партнёр оценил(а) твой компромисс — но не сказал(а) об этом вслух.";
   }
   if (partner.type === 'anxious') {
-    if (choice.tag === 'honest') {
-      addition = " Партнёр явно выдохнул(а): он/она боялся(ась), что ты сейчас уйдёшь.";
-    } else if (choice.tag === 'aggr') {
-      addition = " Партнёр съёжился: «Ты правда так думаешь?..»";
-    } else if (choice.tag === 'avoid') {
-      addition = " Партнёр начал(а) задавать вопросы: «Ты на меня злишься? Что случилось?»";
-    } else if (choice.tag === 'compromise') {
-      addition = " Партнёр успокаивается и говорит: «Спасибо, что не бросаешь меня в этом».";
-    }
+    if (choice.tag === 'honest') addition = " Партнёр явно выдохнул(а): он/она боялся(ась), что ты сейчас уйдёшь.";
+    else if (choice.tag === 'aggr') addition = " Партнёр съёжился: «Ты правда так думаешь?..»";
+    else if (choice.tag === 'avoid') addition = " Партнёр начал(а) задавать вопросы: «Ты на меня злишься? Что случилось?»";
+    else if (choice.tag === 'compromise') addition = " Партнёр успокаивается и говорит: «Спасибо, что не бросаешь меня в этом».";
   }
   if (partner.type === 'secure') {
-    if (choice.tag === 'honest') {
-      addition = " Партнёр отвечает тем же — открытостью и уважением к твоей прямоте.";
-    } else if (choice.tag === 'aggr') {
-      addition = " Партнёр спокойно обозначает границу: «Я готов(а) поговорить, но без обвинений».";
-    } else if (choice.tag === 'avoid') {
-      addition = " Партнёр замечает твоё молчание, но не давит. Он/она даёт тебе время.";
-    } else if (choice.tag === 'compromise') {
-      addition = " Партнёр принимает компромисс с благодарностью: «Мне нравится, как ты ищешь решение».";
-    }
+    if (choice.tag === 'honest') addition = " Партнёр отвечает тем же — открытостью и уважением к твоей прямоте.";
+    else if (choice.tag === 'aggr') addition = " Партнёр спокойно обозначает границу: «Я готов(а) поговорить, но без обвинений».";
+    else if (choice.tag === 'avoid') addition = " Партнёр замечает твоё молчание, но не давит. Он/она даёт тебе время.";
+    else if (choice.tag === 'compromise') addition = " Партнёр принимает компромисс с благодарностью: «Мне нравится, как ты ищешь решение».";
   }
-  
-  // Дополнительная надстройка по накопленному паттерну
-  if (counts.honest >= 4) {
-    addition += " К этому моменту партнёр уже доверяет тебе больше, чем в начале.";
-  }
-  if (counts.aggr >= 3) {
-    addition += " Партнёр стал осторожнее в общении с тобой — чувствуется напряжение.";
-  }
-  if (counts.avoid >= 4) {
-    addition += " Между вами накопилось много невысказанного.";
-  }
-  
-  // Настроение партнёра — самая сильная надстройка
-  if (mood === 'warm') {
-    addition += " Ты чувствуешь, что партнёр с тобой мягче, чем обычно.";
-  } else if (mood === 'cold') {
-    addition += " Партнёр держит дистанцию — твои последние выборы его/её задели.";
-  }
-  
+  if (counts.honest >= 4) addition += " К этому моменту партнёр уже доверяет тебе больше, чем в начале.";
+  if (counts.aggr >= 3) addition += " Партнёр стал осторожнее в общении с тобой — чувствуется напряжение.";
+  if (counts.avoid >= 4) addition += " Между вами накопилось много невысказанного.";
+  if (mood === 'warm') addition += " Ты чувствуешь, что партнёр с тобой мягче, чем обычно.";
+  else if (mood === 'cold') addition += " Партнёр держит дистанцию — твои последние выборы его/её задели.";
   return base + addition;
 }
 
 function renderScene() {
   const scene = state.session.scenarios[state.session.currentScene];
   const total = state.session.scenarios.length;
-  const idx = state.session.currentScene;
-  document.getElementById('sceneNumber').textContent = `Сцена ${idx + 1} / ${total}`;
+  document.getElementById('sceneNumber').textContent = `Сцена ${state.session.currentScene+1} / ${total}`;
   document.getElementById('sceneTitle').textContent = scene.title;
   document.getElementById('sceneContext').textContent = scene.context;
   const optionsEl = document.getElementById('gameOptions');
   optionsEl.innerHTML = '';
+  optionsEl.style.display = 'block';
   scene.options.forEach((opt, i) => {
     const btn = document.createElement('button');
     btn.className = 'option';
@@ -982,7 +858,6 @@ function renderScene() {
     btn.onclick = () => selectGameAnswer(i);
     optionsEl.appendChild(btn);
   });
-  document.getElementById('gameOptions').style.display = 'block';
   document.getElementById('partnerReactionContainer').style.display = 'none';
 }
 
@@ -990,45 +865,30 @@ function selectGameAnswer(index) {
   const scene = state.session.scenarios[state.session.currentScene];
   const choice = scene.options[index];
   const counts = updatePartnerWarmth(choice.tag);
-  
   state.session.choices.push({
-    sceneId: scene.id,
-    sceneTitle: scene.title,
-    optionText: choice.text,
-    tag: choice.tag,
-    effects: choice.effects,
+    sceneId: scene.id, sceneTitle: scene.title,
+    optionText: choice.text, tag: choice.tag, effects: choice.effects,
   });
-  
-  // Применяем эффекты (модификатор от типа партнёра)
   const modifiedEffects = { ...choice.effects };
   if (state.partner.type === 'anxious' && modifiedEffects.EQ > 0) modifiedEffects.EQ += 1;
   if (state.partner.type === 'avoidant' && modifiedEffects.U > 0) modifiedEffects.U = Math.max(-3, modifiedEffects.U - 1);
-  
   const newParams = { ...state.character.params };
   for (const k in modifiedEffects) newParams[k] = Math.max(5, Math.min(95, newParams[k] + modifiedEffects[k]));
   const deltas = {};
   for (const k in newParams) deltas[k] = newParams[k] - state.character.params[k];
   state.character.params = newParams;
-  
-  const reactionText = adaptReaction(scene, choice, counts);
-  
+  const reactionText = adaptReaction(choice, counts);
   document.getElementById('gameOptions').style.display = 'none';
   document.getElementById('partnerReaction').textContent = reactionText;
   document.getElementById('partnerReactionContainer').style.display = 'block';
   document.getElementById('liveParams').innerHTML = renderParams(newParams, deltas);
-  
-  setTimeout(() => {
-    document.getElementById('partnerReactionContainer').scrollIntoView({ behavior: 'smooth' });
-  }, 100);
+  setTimeout(() => { document.getElementById('partnerReactionContainer').scrollIntoView({ behavior:'smooth' }); }, 100);
 }
 
 function nextScene() {
   state.session.currentScene++;
-  if (state.session.currentScene < state.session.scenarios.length) {
-    renderScene();
-  } else {
-    finishSession();
-  }
+  if (state.session.currentScene < state.session.scenarios.length) renderScene();
+  else finishSession();
 }
 
 // ============================================================================
@@ -1039,160 +899,124 @@ function finishSession() {
   const endParams = state.character.params;
   const deltas = {};
   for (const k in endParams) deltas[k] = endParams[k] - startParams[k];
-  
-  // Подсчёт тегов
-  const counts = { honest: 0, avoid: 0, aggr: 0, compromise: 0 };
+  const counts = { honest:0, avoid:0, aggr:0, compromise:0 };
   state.session.choices.forEach(c => counts[c.tag]++);
-  
   const report = generateReport(deltas, counts);
-  
   state.history.unshift({
     date: state.session.startTime,
     attachType: state.profile.attachType,
     patternType: state.profile.patternType,
     partnerType: state.partner.type,
-    deltas,
-    counts,
+    deltas, counts,
     choicesCount: state.session.choices.length,
-    choices: state.session.choices.map(c => ({ title: c.sceneTitle, tag: c.tag, text: c.optionText })),
+    choices: state.session.choices.map(c => ({ title:c.sceneTitle, tag:c.tag, text:c.optionText })),
     report,
     partnerWarmthEnd: state.session.partnerWarmth,
   });
   saveState();
-  
   renderReport(report, deltas, counts, true);
   show('screen-report');
 }
 
 function generateReport(deltas, counts) {
-  const U = deltas.U || 0, EQ = deltas.EQ || 0, SG = deltas.SG || 0;
+  const U = deltas.U || 0, EQ = deltas.EQ || 0;
   let summary = "";
-  if (U > 10 && EQ > 10) {
-    summary = "Ты прошёл(ла) сессию с сильным ростом уверенности и эмоционального интеллекта. Ты выбирал(а) честность и открытость, даже когда было страшно. Это серьёзный сдвиг.";
-  } else if (U < -10 && EQ < -10) {
-    summary = "Ты прошёл(ла) сессию с падением уверенности и эмоционального интеллекта. Много избегания и агрессии. Это не провал — это карта того, что можно менять. Главное — ты это увидел(а).";
-  } else if (U > 5) {
-    summary = "Ты стал(а) заметно увереннее в этой сессии. Ты чаще выбирал(а) говорить о своих чувствах и границах, даже когда партнёр закрывался.";
-  } else if (EQ > 5) {
-    summary = "Ты стал(а) эмоционально точнее в этой сессии. Ты лучше слышал(а) себя и партнёра, различал(а) свои реакции.";
-  } else if (counts.avoid > counts.honest) {
-    summary = "Ты прошёл(ла) сессию с преобладанием избегания. Ты часто выбирал(а) промолчать, уйти или сделать вид, что всё в порядке. Это защитная стратегия — она помогает не чувствовать боль, но и не даёт близости.";
-  } else {
-    summary = "Ты прошёл(ла) сессию в привычном для себя режиме. Никаких резких сдвигов — и это тоже результат. Иногда важно просто увидеть свой паттерн.";
-  }
+  if (U > 10 && EQ > 10) summary = "Ты прошёл(ла) сессию с сильным ростом уверенности и эмоционального интеллекта. Ты выбирал(а) честность и открытость, даже когда было страшно.";
+  else if (U < -10 && EQ < -10) summary = "Ты прошёл(ла) сессию с падением уверенности и эмоционального интеллекта. Много избегания и агрессии. Это не провал — это карта того, что можно менять.";
+  else if (U > 5) summary = "Ты стал(а) заметно увереннее в этой сессии. Ты чаще выбирал(а) говорить о своих чувствах и границах.";
+  else if (EQ > 5) summary = "Ты стал(а) эмоционально точнее в этой сессии. Ты лучше слышал(а) себя и партнёра.";
+  else if (counts.avoid > counts.honest) summary = "Ты прошёл(ла) сессию с преобладанием избегания. Это защитная стратегия — она помогает не чувствовать боль, но и не даёт близости.";
+  else summary = "Ты прошёл(ла) сессию в привычном для себя режиме. Никаких резких сдвигов — и это тоже результат. Иногда важно просто увидеть свой паттерн.";
   
   let patternObs = "";
-  if (counts.honest >= 8) patternObs = "Ты 8+ раз выбирал(а) честность и открытость. Это редкая смелость. Ты не прятался(ась) за комфортными реакциями и шёл(ла) в контакт, даже когда было неудобно.";
-  else if (counts.avoid >= 8) patternObs = "Ты 8+ раз выбирал(а) избегание. Это твоя защита. Она срабатывает автоматически, часто быстрее, чем ты успеваешь подумать. Задача — замечать этот импульс и оставлять себе выбор.";
-  else if (counts.aggr >= 5) patternObs = "Ты 5+ раз выбирал(а) жёсткие реакции. Это способ защитить себя от уязвимости. Попробуй в следующий раз сначала назвать своё чувство — без «ты», только «я».";
-  else if (counts.compromise >= 8) patternObs = "Ты 8+ раз выбирал(а) компромисс. Это гибкость и желание сохранить связь. Но проверь: не теряешь ли ты себя в этих компромиссах?";
-  else patternObs = "Твои выборы распределились между разными стратегиями. Это говорит о гибкости. Но, возможно, ты пока ищешь свою линию.";
+  if (counts.honest >= 8) patternObs = "Ты 8+ раз выбирал(а) честность и открытость. Это редкая смелость.";
+  else if (counts.avoid >= 8) patternObs = "Ты 8+ раз выбирал(а) избегание. Это твоя защита. Она срабатывает автоматически. Задача — замечать этот импульс и оставлять себе выбор.";
+  else if (counts.aggr >= 5) patternObs = "Ты 5+ раз выбирал(а) жёсткие реакции. Попробуй в следующий раз сначала назвать своё чувство — без «ты», только «я».";
+  else if (counts.compromise >= 8) patternObs = "Ты 8+ раз выбирал(а) компромисс. Это гибкость и желание сохранить связь. Но проверь: не теряешь ли ты себя?";
+  else patternObs = "Твои выборы распределились между разными стратегиями. Это говорит о гибкости.";
   
   const recommendations = [];
   if (state.profile.attachType === 'anxious') {
     recommendations.push("Сегодня скажи вслух одну свою потребность — не намёком, а прямо.");
     recommendations.push("Заметь момент, когда ты хочешь понравиться в ущерб себе. Остановись на 10 секунд.");
-    recommendations.push("Попробуй сказать «мне нужно время», вместо того чтобы соглашаться сразу.");
   } else if (state.profile.attachType === 'avoidant') {
-    recommendations.push("Сегодня скажи близкому человеку одну фразу о том, что ты чувствуешь. Даже если это «мне нужно время».");
+    recommendations.push("Сегодня скажи близкому человеку одну фразу о том, что ты чувствуешь.");
     recommendations.push("Заметь, в какой момент ты хочешь отстраниться. Останься в контакте ещё 30 секунд.");
-    recommendations.push("Попробуй не закрываться, когда тебя о чём-то просят. Скажи «давай обсудим» вместо молчания.");
   } else {
     recommendations.push("Заметь, когда ты слишком быстро берёшь ответственность за чувства другого. Верни себе это.");
     recommendations.push("Позволь себе иногда не быть сильным(ой). Это тоже часть близости.");
-    recommendations.push("Попробуй иногда задать вопрос партнёру, вместо того чтобы предлагать решение.");
   }
   
   let shadow = "";
-  const partnerWarmth = state.session.partnerWarmth;
-  if (partnerWarmth >= 3) {
-    shadow = "Партнёр в этой сессии стал теплее к тебе. Обрати внимание, какие именно твои выборы это вызвали — это твои сильные стороны в отношениях.";
-  } else if (partnerWarmth <= -3) {
-    shadow = "Партнёр в этой сессии отдалился. Это важный сигнал: некоторые твои выборы создают дистанцию, даже если ты не хотел(а) этого. Посмотри, какие именно.";
-  } else {
-    shadow = "Отношения с партнёром в этой сессии были относительно стабильными. Обрати внимание: где ты мог(ла) бы сделать шаг навстречу, но не сделал(а)?";
-  }
+  const w = state.session.partnerWarmth;
+  if (w >= 3) shadow = "Партнёр в этой сессии стал теплее к тебе. Обрати внимание, какие именно твои выборы это вызвали — это твои сильные стороны.";
+  else if (w <= -3) shadow = "Партнёр в этой сессии отдалился. Это важный сигнал: некоторые твои выборы создают дистанцию.";
+  else shadow = "Отношения с партнёром были относительно стабильными. Обрати внимание: где ты мог(ла) бы сделать шаг навстречу, но не сделал(а)?";
   
   return { summary, patternObs, recommendations, shadow };
 }
 
 function renderReport(report, deltas, counts, withMap) {
   const container = document.getElementById('reportContent');
-  const labels = { U: 'Уверенность', EQ: 'Эмоциональный интеллект', SG: 'Социальная гибкость' };
+  const labels = { U:'Уверенность', EQ:'Эмоциональный интеллект', SG:'Социальная гибкость' };
   const deltaHtml = Object.keys(deltas).map(k => {
     const v = deltas[k];
-    return `<div class="param-row">
-      <span class="param-name">${labels[k]}</span>
+    return `<div class="param-row"><span class="param-name">${labels[k]}</span>
       <span class="param-val" style="flex:1; text-align:left;">
-        <span class="delta ${v >= 0 ? 'up' : 'down'}">${v > 0 ? '+' : ''}${v}</span>
-      </span>
-    </div>`;
+      <span class="delta ${v>=0?'up':'down'}">${v>0?'+':''}${v}</span></span></div>`;
   }).join('');
   
-  // Карта выборов
   let mapHtml = '';
   if (withMap && state.session.choices) {
     const dots = state.session.choices.map(c => {
       const cls = c.tag === 'honest' ? 'honest' : c.tag === 'avoid' ? 'avoid' : c.tag === 'aggr' ? 'aggr' : 'compromise';
-      const symbol = c.tag === 'honest' ? '✓' : c.tag === 'avoid' ? '○' : c.tag === 'aggr' ? '!' : '≈';
-      return `<div class="choice-dot ${cls}" title="${c.sceneTitle}">${symbol}</div>`;
+      const sym = c.tag === 'honest' ? '✓' : c.tag === 'avoid' ? '○' : c.tag === 'aggr' ? '!' : '≈';
+      return `<div class="choice-dot ${cls}" title="${c.sceneTitle}">${sym}</div>`;
     }).join('');
-    mapHtml = `
-      <div class="report-section">
-        <h3>Карта твоих выборов</h3>
-        <div class="choice-map">${dots}</div>
-        <div class="choice-legend">
-          <div class="legend-item"><div class="legend-box" style="background:var(--good)"></div> честность</div>
-          <div class="legend-item"><div class="legend-box" style="background:var(--bad)"></div> избегание</div>
-          <div class="legend-item"><div class="legend-box" style="background:var(--warm)"></div> агрессия</div>
-          <div class="legend-item"><div class="legend-box" style="background:var(--accent)"></div> компромисс</div>
-        </div>
-      </div>`;
+    mapHtml = `<div class="report-section"><h3>Карта твоих выборов</h3>
+      <div class="choice-map">${dots}</div>
+      <div class="choice-legend">
+        <div class="legend-item"><div class="legend-box" style="background:var(--good)"></div> честность</div>
+        <div class="legend-item"><div class="legend-box" style="background:var(--bad)"></div> избегание</div>
+        <div class="legend-item"><div class="legend-box" style="background:var(--warm)"></div> агрессия</div>
+        <div class="legend-item"><div class="legend-box" style="background:var(--accent)"></div> компромисс</div>
+      </div></div>`;
   }
   
-  // Динамика партнёра
   let partnerTrack = '';
   if (withMap && state.session.partnerHistory) {
-    const segments = state.session.partnerHistory.map(t => {
+    const segs = state.session.partnerHistory.map(t => {
       let cls = 'neutral';
       if (t === 'honest' || t === 'compromise') cls = 'warm';
       else if (t === 'aggr' || t === 'avoid') cls = 'cold';
       return `<div class="track-segment ${cls}"></div>`;
     }).join('');
-    partnerTrack = `
-      <div class="report-section">
-        <h3>Динамика отношений с партнёром</h3>
-        <p class="report-text">Так менялось «тепло» между вами по ходу сессии:</p>
-        <div class="partner-track">${segments}</div>
-      </div>`;
+    partnerTrack = `<div class="report-section"><h3>Динамика отношений с партнёром</h3>
+      <div class="partner-track">${segs}</div></div>`;
   }
   
   container.innerHTML = `
-    <div class="report-section">
-      <h3>Что произошло</h3>
-      <p class="report-text">${report.summary}</p>
-    </div>
+    <div class="report-section"><h3>Что произошло</h3><p class="report-text">${report.summary}</p></div>
     ${mapHtml}
-    <div class="report-section">
-      <h3>Твои паттерны в этой сессии</h3>
-      <p class="report-text">${report.patternObs}</p>
-    </div>
-    <div class="report-section">
-      <h3>Изменение параметров</h3>
-      ${deltaHtml}
-    </div>
+    <div class="report-section"><h3>Твои паттерны</h3><p class="report-text">${report.patternObs}</p></div>
+    <div class="report-section"><h3>Изменение параметров</h3>${deltaHtml}</div>
     ${partnerTrack}
-    <div class="report-section">
-      <h3>Что попробовать в реальности</h3>
-      <ul class="report-list">
-        ${report.recommendations.map(r => `<li>${r}</li>`).join('')}
-      </ul>
-    </div>
-    <div class="report-section">
-      <h3>Тень</h3>
-      <p class="report-text">${report.shadow}</p>
-    </div>
+    <div class="report-section"><h3>Что попробовать в реальности</h3>
+      <ul class="report-list">${report.recommendations.map(r => `<li>${r}</li>`).join('')}</ul></div>
+    <div class="report-section"><h3>Тень</h3><p class="report-text">${report.shadow}</p></div>
   `;
+}
+
+function renderParams(params, deltas) {
+  const labels = { U:'Уверенность', EQ:'Эмоциональный интеллект', SG:'Социальная гибкость' };
+  return Object.keys(labels).map(k => {
+    const v = params[k] || 0;
+    const d = deltas && deltas[k] ? deltas[k] : 0;
+    const dHtml = d !== 0 ? `<span class="delta ${d>0?'up':'down'}">${d>0?'+':''}${d}</span>` : '';
+    return `<div class="param-row"><span class="param-name">${labels[k]}</span>
+      <div class="param-bar"><div class="param-fill" style="width:${v}%"></div></div>
+      <span class="param-val">${v}${dHtml}</span></div>`;
+  }).join('');
 }
 
 // ============================================================================
@@ -1201,16 +1025,15 @@ function renderReport(report, deltas, counts, withMap) {
 function goToHistory() {
   const list = document.getElementById('historyList');
   if (state.history.length === 0) {
-    list.innerHTML = '<p class="muted">История пуста. Пройди первую сессию.</p>';
+    list.innerHTML = '<p class="muted">История пуста.</p>';
   } else {
     list.innerHTML = state.history.map((h, i) => {
-      const date = new Date(h.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
-      const attachLabel = attachNames[h.attachType] ? attachNames[h.attachType].name : h.attachType;
+      const date = new Date(h.date).toLocaleDateString('ru-RU', { day:'numeric', month:'long', year:'numeric' });
+      const attachLabel = { secure:'Надёжный', anxious:'Тревожный', avoidant:'Избегающий' }[h.attachType] || h.attachType;
       const partnerLabel = partners[h.partnerType] ? partners[h.partnerType].name : '';
       return `<div class="history-item" onclick="viewHistory(${i})">
         <div class="history-date">${date}</div>
-        <div class="history-title">${attachLabel} · ${partnerLabel} партнёр · ${h.choicesCount} сцен</div>
-      </div>`;
+        <div class="history-title">${attachLabel} · ${partnerLabel} партнёр · ${h.choicesCount} сцен</div></div>`;
     }).join('');
   }
   show('screen-history');
@@ -1218,9 +1041,8 @@ function goToHistory() {
 
 function viewHistory(index) {
   const h = state.history[index];
-  // Восстанавливаем сессию для карты
   state.session = {
-    choices: h.choices.map(c => ({ sceneTitle: c.title, tag: c.tag })),
+    choices: h.choices.map(c => ({ sceneTitle:c.title, tag:c.tag })),
     partnerHistory: h.choices.map(c => c.tag),
     partnerWarmth: h.partnerWarmthEnd || 0,
   };
@@ -1232,11 +1054,14 @@ function viewHistory(index) {
 // ПЕРЕЗАПУСК
 // ============================================================================
 function restart() {
-  state.testAnswers = [];
-  state.currentQuestion = 0;
+  state.entryAnswers = [];
+  state.currentEntry = 0;
   state.profile = null;
-  state.character = { name: "", params: { U: 50, EQ: 50, SG: 50 } };
+  state.portrait = null;
+  state.character = { name:"", params:{U:50,EQ:50,SG:50} };
   state.session = null;
+  state.clarifyActive = false;
+  state.clarifyAnswers = [];
   document.getElementById('charName').value = '';
   show('screen-welcome');
 }
